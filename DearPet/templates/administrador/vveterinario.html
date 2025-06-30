@@ -1,0 +1,131 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver usuario{% endblock %}
+
+{% block admin %}
+
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Veterinarios</h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="mi_tabla">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Rut</th>
+                        <th>Primer Apellido</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+
+                    <tr>
+                        <td>{{user.id_usuario}}</td>
+                        <td>{{user.nombre}}</td>
+                        <td>{{user.rut}}</td>
+                        <td>{{user.primer_apellido}}</td>
+                        <td>{{user.fono}}</td>
+                        <td>{{user.direccion}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <a href="#" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-dearpet">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Rut</th>
+                        <th>Primer Apellido</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Email</th>                        
+                        <th>Operaciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</div>
+{% if users.has_other_pages %}
+
+<div class="navigation margin" style="width: 250px;">
+    <ul class="pagination">
+        {% if users.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ users.previous_page_number }}"><i
+                    class="fa-solid fa-arrow-left"></i></a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link"><i class="fa-solid fa-arrow-left"></i></a>
+        </li>
+        {% endif %}
+        {% for i in users.paginator.page_range %}
+        {% if users.number == i %}
+        <li class="page-item">
+            <a class="page-link">{{ i }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if users.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ users.next_page_number }}"><i
+                    class="fa-solid fa-arrow-right"></i></a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link"><i class="fa-solid fa-arrow-right"></i></a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+<script>
+    new DataTable('#mi_tabla', {
+    info: false,
+    ordering: true,
+    paging: false,
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+});
+</script>
+
+{% endif %}
+
+{% endblock %}

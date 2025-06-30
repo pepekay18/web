@@ -1,0 +1,18 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+    <h2>Formulario de imagen</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="zona">{{ form.zona.value }}</textarea>
+        <img style="max-width: 200px;" src="{{form.url.value}}" alt="imagen">
+        {{form.errors}}
+        <input type="file" name="imagen" accept="image/*">
+
+        <button type="submit">Guardar</button>
+    </form>
+
+{%endblock%}

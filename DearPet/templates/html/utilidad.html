@@ -1,0 +1,130 @@
+{% extends "html/template.html" %}
+{% load static %}
+{% block title %}Nosotros{% endblock %}
+
+{% block body %}
+
+<H1 class="col-12 center">¡Bienvenidos a Dear Pet!</H1>
+<div class="col-12 row text orden ">
+    <div class="col-sm-12 col-md-4 center">
+        <img src="{% static 'media/iconos/ICONOS-10.png' %}" class="col-sm-12 img">
+    </div>
+    <div class="col-sm-12 col-md-8">
+        <p class=" col-12 text2">
+            Dear Pet tiene como propósito acompañar a los tutores de mascotas, dando seguridad y tranquilidad,
+             y a los Veterinarios ofreciendo herramientas que agilicen su labor.
+
+            Queremos que todas las mascotas tengan su documento de identidad y que su cuidado se lleve de 
+            una manera responsable, con conocimiento de las necesidades de cada especie.
+            El Tag ID y la app Dear Pet cumplen la función de identificación y protección que ningún otro sistema ofrece.
+
+            Reunimos la posibilidad de identificarlas, ubicarlas en caso de extravio, 
+            llevar un registro de salud de calidad medica y un enlace directo con los veterinarios 
+            a quienes se les proporcionan valiosas herramientas para acompañarlos en su preciado labor.
+        </p>
+    </div>
+</div>
+
+<div class="col-12 row text ">
+    <h3 class="center">Utilidad</h3>
+    <div class="col-sm-12 col-md-8 ">
+
+        <p class=" col-12 text2">
+            Para los tutores de mascotas Dear Pet da la tranquilidad que en caso que la mascota se pierda podrá 
+            ser identificada y recuperada fácilmente, también ofrece una pagina de salud extraordinaria.
+            Para los veterinarios, Dear Pet se convierte en una valiosa herramienta que agiliza los procesos 
+            de registro de pacientes, proporciona toda la información médica de la mascota y se convierte en 
+            la nueva agenda profesional facilitando el trabajo diario.
+        </p>
+    </div>
+    <div class="col-sm-12 col-md-4 center">
+        <img src="{% static 'media/iconos/ICONOS-12.png' %}" class="col-sm-12 img">
+    </div>
+
+
+</div>
+<div class="col-12 row text orden">
+    <h3 class="center">NFC</h3>
+    <div class="col-sm-12 col-md-4 center">
+        <img src="{% static 'media/iconos/ICONOS-08.png' %}" class="col-sm-12 img">
+    </div>
+    <div class="col-sm-12 col-md-8 ">
+
+        <p class=" col-12 text2"> 
+            El Tag ID y la app Dear Pet cumplen la función de identificación y protección que ningún otro sistema ofrece.
+
+            Reunimos la posibilidad de identificarlas, ubicarlas en caso de extravio, llevar 
+            un registro de salud de calidad medica y un enlace directo con los veterinarios a quienes 
+            se les proporcionan valiosas herramientas para acompañarlos en su preciado labor.
+        </p>
+    </div>
+
+</div>
+<div class="col-12 row text">
+    <h3 class="center">App 100% gratuita para tutores</h3>
+    <div class="col-sm-12 col-md-8 ">
+
+        <p class=" col-12 text2">
+            Descarga la app Dear Pet, crea una cuenta como Tutor y vincula el Tag ID para crearle un perfil 
+            digital a tu mascota.
+
+            Cuando un tercero contacte el NFC del Tag ID o escanee el código Qr te llegará
+
+            instantáneamente la ubicación del peludo.
+
+            A quien lo encuentre se le abrirá lo que llamamos el perfil SOS con el nombre de la mascota, 
+            foto, descripción relevante y el contacto directo con el tutor via whatspp.
+
+            También está la opción de colocar los datos de una clínica o veterinario de urgencia.
+            En el perfil de la mascota encontrarás un botón 🆘 Si tu mascota se pierde has clic allí y se enviará un 
+            mensaje a toda la comunidad Dear Pet alertando el extravío de tu mascota para que te proporcionen ayuda.
+
+            (Opcionalmente el envio automático de un mensaje redes sociales y sosafe).
+        </p>
+        <h3 class="center">¿Que datos podras ver/cargar de tu mascota?</h3>
+        <p>
+            Datos del perfil de cada mascota:<br> 
+                Fotos hasta 3 (1 para perfil SOS)<br>
+                Nombre (SOS)<br>
+                Edad (fecha de nacimiento)<br>
+                Tipo (GATO-PERRO U OTROS)<br>
+                Raza (razas y mestizo tb colocarlo)<br>
+                Color<br>
+                Genero<br>
+                Esterilizado o no<br>
+                Numero de microchip (si tiene)<br>
+                Comprobante de registro (si es que esta registrada)<br>
+                Descripción (SOS)<br>
+                Veterinario o clinica veterinaria de urgencia (para perfil SOS)<br>
+                La página de salud cuenta con dos áreas, la ficha clinica y registro de atenciones veterinarias.<br>
+                Contenido de ficha clínica: (registro interno, no es para compartir en web, se podrían dar solo algunos de ejemplo)<br>
+                Vacunas (opción a subir comprobantes y programación en el calendario de auto avisos para recordar nuevas vacunas o repetir las correspondientes (calculo basado en el periodo de protección de la vacuna ejemplo antirrábica un año, KF un año)<br>
+                OTRAS VACUNAS (PARA LOS CASOS QUE SON OTRO TIPO DE MASCOTA COMO URUNES, CONEJOS, etc)<br>
+                Desparacitación (fechas y programación de nuevos avisos/recordatorios 3 meses)<br>
+                Peso<br>
+                Alimentación (cantidad aproximada y regularidad ejemplo 500 gr. 3 veces al dia)<br>
+                Alergias<br>
+                Enfermedades crónicas<br>
+                Medicación<br>
+                Comportamiento (observaciones generales y específicas) (observaciones se guardan por separado por fecha)<br>
+                Antecedentes de accidentes<br>
+                Procedimientos quirúrgicos<br>
+                Examenes de imagen y laboratorio<br>
+                Certificados medicos<br>
+                Documentos<br>
+                Atenciones Veterinarias:<br>
+                Fecha<br>
+                Nombre del veterinario q realizó la atención<br>
+                Diagnostico<br>
+                Indicaciones<br>
+                Documentos (recetas, ordenes médicas, resultado de exámenes)<br>
+        </p>
+    </div>
+    <div class="col-sm-12 col-md-4 center">
+        <img src="{% static 'media/iconos/ICONOS-06.png' %}" class="col-sm-12 img">
+    </div>
+
+
+</div>
+
+{% endblock %}

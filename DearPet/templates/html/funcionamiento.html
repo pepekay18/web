@@ -1,0 +1,29 @@
+{% extends "html/template.html" %}
+{% load static %}
+{% block title %}Nosotros{% endblock %}
+
+{% block body %}
+
+<div style="margin-top: 100px;">
+
+</div>
+
+<div class="col-10" style=" background-color: rgb(229 231 233);
+                            margin: auto;
+                            padding: 30px;
+                            text-align: center;
+                            border-radius: 50px;">
+    <div class="col-4 spr"  style="margin:auto auto;"><h1>Nuestra Tecnologia</h1></div>
+    {% for i in funcion %}
+
+        <div class="col-10 spr" style="margin: 50px auto"  >
+            <h2>{{i.titulo}}</h2>
+        </div>
+        <div class="col-10 spr" style="margin: 50px auto"  >
+            <h4>{{i.parrafo}}</h4>
+        </div>
+        
+    {% endfor %}
+</div>
+
+{% endblock %}

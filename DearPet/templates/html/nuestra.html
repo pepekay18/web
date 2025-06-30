@@ -1,0 +1,32 @@
+{% extends "html/template.html" %}
+
+{% block title %}Politicas{% endblock %}
+
+{% block body %}
+
+<div style="margin-top: 100px;">
+
+</div>
+
+<div class="col-10" style=" background-color: rgb(229 231 233);
+                            margin: auto;
+                            padding: 30px;
+                            text-align: center;
+                            border-radius: 50px;">
+    <div class="col-4 spr"  style="margin:auto auto;"><h1>Nuestra Tecnologia</h1>
+
+            {%for nues in nuestras%}
+
+            <h1>{{nues.titulo}}</h1>
+            <p>{{nues.parrafo}}</p>
+            {% if nues.url != None %}
+            <img src="{{nues.url.value}}" alt="">
+            {%endif%}
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Politicas</h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="mi_tabla">
+                <thead class="table-dark">
+                    <tr>
+                        <th>pregunta</th>
+                        <th>respuesta</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for preguntas in preguntas %}
+                        {%if preguntas.eliminado == 0 %}
+                        <tr>
+                            
+                            <td>{{ preguntas.pregunta }}</td>
+                            <td>{{ preguntas.respuesta }}</td>
+                            <td>
+                            
+                                <a href="preguntas-actualizar/{{preguntas.id}}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                
+                                <a href="preguntas-eliminar/{{preguntas.id}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                        {%endif%}
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-dearpet">
+                    <tr>
+                        <th>pregunta</th>
+                        <th>respuesta</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="card-footer">
+            {% if preguntas_pagina.has_other_pages %}
+            <div class="pagination margin" style="width: 250px;">
+                {% if preguntas_pagina.has_previous %}
+                <a class="btn btn-primary " href="?page={{ preguntas_pagina.previous_page_number }}"><i
+                        class="fa-solid fa-arrow-left"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i></a>
+                {% endif %}
+                {% for i in preguntas_pagina.paginator.page_range %}
+                {% if preguntas_pagina.number == i %}
+                <a class="btn btn-primary">{{ i }}</a>
+                {% else %}
+                <a class="btn btn-primary" href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if preguntas_pagina.has_next %}
+                <a class="btn btn-primary" href="?page={{ preguntas_pagina.next_page_number }}"><i
+                        class="fa-solid fa-arrow-right"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    new DataTable('#mi_tabla', {
+    info: false,
+    ordering: true,
+    paging: false,
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+# Entorno virtual
+venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Archivos temporales de VSCode, PyCharm, etc.
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+*.DS_Store
+.idea/
+.vscode/
+
+# Archivos de entorno y configuración secreta
+SECRET_KEY.env
+.env
+*.env
+
+# Archivos generados por Django
+db.sqlite3
+*.sqlite3
+
+# Archivos estáticos generados
+staticfiles/
+DearPet/static/media/
+DearPet/media/
+
+# Archivos de migraciones (opcional si no querés versionarlos)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+**/migrations/*.py
+
+# Archivos de salida de pruebas
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.cache
+.pytest_cache/

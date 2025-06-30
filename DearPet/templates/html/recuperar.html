@@ -1,0 +1,21 @@
+{% extends "html/template.html" %}
+
+{% block title %}recuperar contraseña{% endblock %}
+
+{% block body %}
+
+<div class="cien col-12">
+    <form method="post" class="cien">
+
+        {% csrf_token %}
+        <div class="col-10 col-sm-5 col-md-3 margin cien">
+            <h1 class="center">Modificar contraseña</h1>
+            <input class="form-control" type="email" placeholder="email" name="email" required>
+            <input class="form-control" type="password" placeholder="contraseña enviada al correo" name="contrasena" required>
+            
+            <input class="form-control" type="password" placeholder="Ingrese nueva contraseña" name="contrasena_nueva" required>
+            <button class="btn btn-dearpet-secundario bformulario">Modificar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

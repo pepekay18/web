@@ -1,0 +1,96 @@
+
+{% extends "tutor/home.html" %}
+{%load static%}
+
+{% block tutor %}
+<div class="page-content">
+    <!-- Page title -->
+    <div class="page-title">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h5 class="h3 font-weight-400 mb-0 text-white">Formulario de Actualizar Contraseña</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-7 d-sm-flex flex-sm-column">
+            <div class="row flex-sm-fill">
+
+                <form method="post" class="col-xl-8" autocomplete="off" onsubmit="return do_ajax(this)">
+                    {% csrf_token %}
+                
+                <input type="password" tabindex="7" class="form-control" style="margin-bottom: 30px; margin-top: 50px;" minlength="6" placeholder="Contraseña"
+                    name="contrasena" id="contrasena" pattern="^[^<>]*$" required>
+            
+                <input type="password" tabindex="8" class="form-control" style="margin-bottom: 80px; margin-top: 20px;"placeholder="Confirmar Contraseña"
+                    name="contrasena1" id="contrasena1" pattern="^[^<>]*$" required>
+                <button type="submit" class="btn btn-primary col-xl-8">Guardar</button>
+            </form>
+            <script>
+                function validarFormulario() {
+                    //lectura de cajas
+            
+                    let input_contrasena = document.getElementById("contrasena");
+                    let input_contrasena1 = document.getElementById("contrasena1");
+            
+            
+                    //definicion de expresiones regulares
+            
+                    let validacion_notener = /^[^<>]*$/;
+            
+                    let validacion_password = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
+            
+                    if (input_contrasena.value.length < 6) {
+                        mostrar("la contraseña tiene que tener por lo menos 6 caracteres")
+                        return false;
+                    }
+                    if (!validacion_password.test(input_contrasena.value)) {
+                        mostrar("La contraseña debe tener al menos una mayuscula, minuscula y un numero");
+                        return false;
+                    }
+            
+            
+                    if (!validacion_notener.test(input_contrasena.value)) {
+                        mostrar("La contraseña no debe contener los caracteres '<' o '>'.");
+                        return false;
+                    }
+                    if (!validacion_notener.test(input_contrasena1.value)) {
+                        mostrar("La contraseña no debe contener los caracteres '<' o '>'.");
+                        return false;
+                    }
+                    return true;
+                }
+            
+                function mostrar(mensaje) {
+                    const myModal = new bootstrap.Modal(document.getElementById('messageModal'), {});
+                    let contenido_modal = document.querySelector("#messageModal .modal-body");
+                    contenido_modal.innerHTML = mensaje;
+                    myModal.show();
+                }
+            
+                function do_ajax(form) {
+            
+                    if (validarFormulario()) {
+                        let xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                //Leer JSON
+                                let json = JSON.parse(xhr.responseText);
+                                mostrar(json.message);
+                                if (!isNaN(json.id) && json.id != 0) {
+                                    setTimeout(() => {
+                                        window.location = "/login";
+                                    }, 5000);
+                                }
+            
+                            }
+                        }
+                        xhr.open("POST", form.action);
+                        xhr.send(new FormData(form));
+                    }
+                    return false;
+                }
+            
+            
+            </script>
+{%endblock%}

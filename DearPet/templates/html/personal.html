@@ -1,0 +1,93 @@
+{% extends "html/template.html" %}
+{% load static %}
+{% block title %}inicio{% endblock %}
+
+{% block body %}
+
+
+
+<div class="col-12 row cien">
+    {% for mas in masco %}
+
+
+    <div class="col-md-5 col-sm-9 col-10 margin mascota row">
+        <div class="col-6 margin">
+            <div class="col-12 ">
+                <img class="foto col-12 "
+                    src="{% static 'media/imagenes/Isologos DEARPET_Mesa de trabajo 1 copia.png' %}"
+                    alt="Foto no Encontrada">
+            </div>
+
+        </div>
+        <div class="col-6 row mascota-datos">
+
+
+            <div class="col-12 center margin" >
+                <input type="hidden" value="{{mas.id}}">
+                <h4>{{mas.nombre}}</h4>
+            </div>
+            
+
+            <div class="col-6">
+                <p>{{mas.fecha_nacimiento}}</p>
+            </div>
+            <div class="col-6">
+                <p>{{mas.tipo_mascota}}</p>
+            </div>
+            <div class="col-6">
+                <p>{{mas.raza}}</p>
+            </div>
+            {%if mas.extraviada == 1%}
+            <div class="col-6">
+                <h6>extraviada</h6>
+            </div>
+            {%endif%}
+            <div class="col-12">
+                <p>{{mas.descripcion}}</p>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+{% if masco.has_other_pages %}
+
+<div class="pagination margin center" style="width: 250px;">
+
+    {% if users.has_previous %}
+    <a class="btn btn-primary " href="?page={{ users.previous_page_number }}">atras</a>
+    {% else %}
+    <a class="btn btn-primary">atras</a>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+    {% if users.number == i %}
+    <a class="btn btn-primary">{{ i }}</a>
+    {% else %}
+    <a class="btn btn-primary" href="?page={{ i }}">{{ i }}</a>
+    {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+    <a class="btn btn-primary" href="?page={{ users.next_page_number }}">siguiente</a>
+    {% else %}
+    <a class="btn btn-primary">siguiente</a>
+    {% endif %}
+</div>
+
+
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Mascotas</title>
+    <link href="/static/media/iconos/ICONOS-16.png" rel="icon">
+  <meta name="keywords" content>
+  <meta name="description" content>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no">
+<script type="text/javascript" src="{%static 'assets/js/flexible.js'%}"></script>
+<link href="https://fonts.font.im/css?family=Nunito:300,400,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'assets/layui/css/layui.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/reset.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/swiper.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/animate.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/jquery-weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/layout.css'%}?v=6">
+<script type="text/javascript" src="{%static 'assets/js/jquery-1.9.1-min.js'%}"></script>
+<link href="{%static 'assets/css/icofont/icofont.css'%}" rel="stylesheet" />
+<script type="text/javascript" src="{%static 'assets/js/Upload_FrontImg.js'%}?v=1"></script>
+<script type="text/javascript" src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/compressor.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/cropper.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/swiper.min.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/swiper.animate1.0.3.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/wow.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/jquery-weui.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/layui/layui.js'%}"></script>
+<script type="text/javascript" src="{%static 'js/Common.js'%}?v=123"></script>
+<script type="text/javascript" src="{%static 'assets/js/nav.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/login.js'%}?v=6"></script>
+<link href="{%static 'assets/js/just-tip.css'%}" rel="stylesheet">
+<script src="{%static 'assets/js/justTools.js'%}"></script>
+<link rel="stylesheet" href="{%static 'assets/css/cropper.min.css'%}?v=2">
+<link rel="stylesheet" href="{%static 'assets/css/bootstrap.css'%}">
+<style scoped>
+        .custom-input {
+            width: 100%;
+            padding: 0.2rem;
+            font-size: 0.4rem;
+            color:#000;
+            border: hidden;
+            /*border-bottom: 2px solid #ddd; */
+            border-bottom: hidden;
+            border-radius: 0;
+            background: #fff;
+        }
+        /*
+        .custom-input::placeholder {
+            color: #888;
+        }*/
+        .layui-input, .layui-select, .layui-textarea{
+            border-radius: 0;
+            border: hidden;
+            border-bottom: 2px solid #ddd;
+            background: #fff;
+            padding: 0.2rem;
+        }
+        .layui-form-select .layui-input{
+            font-size: 0.4rem;
+            color:#000;
+            border: hidden;
+            border-bottom: hidden;
+        }
+
+        .layui-form-switch{
+           margin-top: 0;
+           min-width:70px;
+           height: 33px;
+        }
+        .layui-form-switch i{
+            width: 24px;
+            height: 24px;
+        }
+        .layui-form-onswitch i{
+            margin-left: -26px;
+        }
+        .layui-form-onswitch{
+            border-color: #4cbc11;
+            background-color: #4cbc11;
+        }
+
+        .tag-cc .tabcc .swiper-slide{
+            background: #ddd;
+        }
+
+        .profile-cc .profile-list{
+            border-bottom-right-radius: 0.6rem;
+            border-bottom-left-radius: 0.6rem;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+        }
+        /*
+        input::placeholder {
+            color: #000;
+        }
+        */
+        .combtn a{
+            border-radius: 0.48rem;
+        }
+
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+
+        input[type="date"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+    </style>
+
+</head>
+<body style="font-size: 15px;">
+<div id="logotop">
+    <div class="logoheader topbar active" style="background: #fff; color: #000;">
+        <div class="ww clearfix">
+            <div class="fl back"><a href="javascript:history.back();"><i class="icofont" style="color: #000;">&#xea74;</i></a></div>
+            <div class="fl tit"><span id="tshowtit"></span></div>
+        </div>
+    </div>
+</div>
+<script></script>
+<div class="mdiv" style="background: #f6f6f6;"></div>
+    {%block tutor%}
+    {% endblock %}
+</body>
+</html>

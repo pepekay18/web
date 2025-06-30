@@ -1,0 +1,32 @@
+{% extends "html/template.html" %}
+
+{% block title %}Politicas{% endblock %}
+
+{% block body %}
+
+
+<div style="margin-top: 100px;">
+
+</div>
+
+<div class="col-10" style=" background-color: rgb(229 231 233);
+                            margin: auto;
+                            padding: 30px;
+                            text-align: center;
+                            border-radius: 50px;">
+    <div class="col-10 spr"  style="margin:auto auto;"><h1>Preguntas Frecuentes</h1>
+    <div style="margin-top: 30px;">
+        {%for pre in preguntas %}
+
+        <h1>{{pre.pregunta}}</h1>
+        <p>{{pre.respuesta}}</p>
+
+
+        {% endfor %}
+    </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

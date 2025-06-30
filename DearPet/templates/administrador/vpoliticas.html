@@ -1,0 +1,105 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Politicas</h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="mi_tabla">
+                <thead class="table-dark">
+                    <tr>
+                        <th>titulo</th>
+                        <th>descripcion</th>
+                        <th>url</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for poli in politicas %}
+                        {%if poli.eliminado == 0 %}
+                        <tr>
+                            <td>{{ poli.titulo }}</td>
+                            <td>{{ poli.descripcion }}</td>
+                            
+                            <td>{{ poli.url }}</td>
+                            <td>
+                                <a href="politicas-actualizar/{{poli.id}}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                
+                                <a href="politicas-eliminar/{{poli.id}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
+                        </tr>
+                        {%endif%}
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-dearpet">
+                    <tr>
+                        <th>titulo</th>
+                        <th>descripcion</th>
+                        <th>url</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="card-footer">
+            {% if page.has_other_pages %}
+            <div class="pagination margin" style="width: 250px;">
+                {% if page.has_previous %}
+                <a class="btn btn-primary " href="?page={{ page.previous_page_number }}"><i
+                        class="fa-solid fa-arrow-left"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i></a>
+                {% endif %}
+                {% for i in page.paginator.page_range %}
+                {% if page.number == i %}
+                <a class="btn btn-primary">{{ i }}</a>
+                {% else %}
+                <a class="btn btn-primary" href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page.has_next %}
+                <a class="btn btn-primary" href="?page={{ page.next_page_number }}"><i
+                        class="fa-solid fa-arrow-right"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    new DataTable('#mi_tabla', {
+    info: false,
+    ordering: true,
+    paging: false,
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+    <h2>Formulario de Promociones</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="nombre">{{ form.nombre.value }}</textarea>
+        <input type="date"  name="fechainicio" value="{{ form.fechainicio.value|date:"Y-m-d" }}">
+        <input type="date"  name="fechatermino" value="{{ form.fechatermino.value|date:"Y-m-d" }}">
+        <select name="habilitado">
+            <option value="1" {% if form.habilitado.value == 1 %}selected{% endif %}>Sí</option>
+            <option value="0" {% if form.habilitado.value == 0 %}selected{% endif %}>No</option>
+        </select>
+        <img style="max-width: 200px;" src="{{form.url.value}}" alt="imagen">
+        <input type="file" name="imagen" accept="image/*"> <!-- Campo para subir la imagen -->
+        {{form.errors}}
+        <button type="submit">Guardar</button>
+    </form>
+{%endblock%}

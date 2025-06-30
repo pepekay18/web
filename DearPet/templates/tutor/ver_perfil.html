@@ -1,0 +1,81 @@
+{% extends "tutor/tutor.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block tutor %}
+
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Perfil</h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="mi_tabla">
+                <thead class="table-dark">
+                    <tr>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Fono</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in usuario %}
+
+                    <tr>
+
+                        <td>{{ form.rut }}</td>
+                        <td>{{ form.nombre }}</td>
+                        <td>{{ form.primer_apellido }}</td>
+                        <td>{{ form.fono }}</td>
+                        <td>{{ form.direccion }}</td>
+                        <td>{{ form.email }}</td>
+                      
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-dearpet">
+                    <tr>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Fono</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    new DataTable('#mi_tabla', {
+        info: false,
+        ordering: true,
+        paging: false,
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+           
+        },
+    });
+</script>
+
+{% endblock %}
+

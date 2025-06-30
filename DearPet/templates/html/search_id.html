@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet SOS</title>
+
+<meta charset="utf-8">
+<meta name="keywords" content>
+<meta name="description" content>
+<meta name="csrf-token" content="{{ csrf_token }}">
+<meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no">
+<script type="text/javascript" src="{%static 'assets/js/flexible.js'%}"></script>
+<style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:none}ins,a{text-decoration:none}</style>
+<link href="https://fonts.font.im/css?family=Nunito:300,400,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'assets/layui/css/layui.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/reset.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/swiper.min.css'%}">
+
+<link rel="stylesheet" href="{%static 'assets/css/animate.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/jquery-weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/layout.css'%}?v=6">
+<script type="text/javascript" src="{%static 'assets/js/jquery-1.9.1-min.js'%}"></script>
+<link href="{%static 'assets/css/iconfont/style.css'%}" rel="stylesheet" />
+<link href="{%static 'assets/css/icofont/icofont.css'%}" rel="stylesheet" />
+<script type="text/javascript" src="{%static 'assets/js/swiper.min.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/swiper.animate1.0.3.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/wow.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/jquery-weui.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/layui/layui.js'%}"></script>
+<script type="text/javascript" src="{%static 'media/js/Common.js'%}?v=123"></script>
+<script type="text/javascript" src="{%static 'assets/js/nav.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/login.js'%}?v=6"></script>
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrhrHSopeKF592HZubllqmCQn2dksYs54&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cA"
+    async defer>
+</script>
+
+    <style>
+        .hidden {
+            display: none !important;
+        }
+        .oneline {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+          .bgswp .swiper-slide{ min-height:250px;}
+        .bgswp .swiper-slide img{min-height:200px;
+            /*
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 16px;
+            */
+        }
+    </style>
+</head>
+<body id="index">
+
+    <div class="htop">
+        <div class="ww clearfix">
+            <div class="fl logo">
+                <a href="#">
+                    <img src="{%static 'imagenes/isologos DEARPET-08.png'%}" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="inav">
+        <a onclick="GotoLocation()" class="inavp">
+            <img src="{%static 'imagenes/positionok.png'%}" /></a>
+        <a onclick="PhoneNumberSelect()" class="inavt">
+            <img src="{%static 'imagenes/icall.gif'%}" /></a>
+        <a href="{%url 'inicio' %}" class="inavm">
+            <img src="{%static 'imagenes/isologos DEARPET-03.png'%}" /></a>
+    </div>
+    <div class="ibox">
+        <em class="tab icofont down active">&#xea76;</em>
+        <div class="txt active">
+            <div class="cc" style="position:relative;">
+                <div style="position:absolute; background:#2460ae; top:-1rem; border-radius:50%; width:2rem; height:2rem; background:#ea5514; display:flex; align-items:center; justify-content:center; flex-direction:column;" class="hidden">
+                    <span style="font-size:0.4rem; font-weight:bold; font-style: italic; text-align:center;">
+                        OH!<br/>Me Perdí
+                    </span>
+                </div>
+
+                <div style="position:absolute; background:#2460ae; right:0; top:0; border-top-right-radius:10px; border-bottom-left-radius: 10px; padding: 0.2rem;" onclick="ToMyProfile('{{mascota.id_externo}}')">
+                    <span style="color:#fff; font-size:0.36rem; font-weight:bold;">Mi Perfil >></span>
+                </div>
+
+                <h1 class="oneline">{{mascota.nombre}}</h1>
+                <h2 class="hidden" >
+
+                </h2>
+                <h2>
+                   {% if mascota.genero == 1 %}
+                        Macho
+                   {% elif mascota.genero == 2 %}
+                        Hembra
+                   {% else %}
+                        Desconocido
+                   {% endif %}
+                </h2>
+
+                <h2 class="pos hidden" style="display:flex;align-items:center;">
+                    <!-- text-overflow:ellipsis;overflow:hidden;white-space:nowrap;-->
+                    <span style="display:inline-block;width:100%;">
+                        <i class="icofont" style="display:inline-block;font-size:0.48rem;color:#4cbc11;margin:0 auto;"></i>
+                    </span>
+                </h2>
+
+                <div class="info">
+                    <p style="padding-bottom:0.5rem;">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg">
+        <div class="swiper bgswp">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <img id="myImage" src= "" alt="Foto de la mascota">
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <script>
+        var _url = "{{ url }}";  // URL base
+        var img_url = "{{ mascota.foto }}";  // Parámetro desde la vista
+
+        // Concatenamos la URL base con el parámetro
+        var imageUrl = _url + img_url;
+
+        // Asignamos la URL generada al atributo src de la imagen
+        document.getElementById("myImage").src = imageUrl;
+    </script>
+
+    <script type="text/javascript">
+        var swiper = new Swiper(".bgswp", {
+            direction: "vertical",
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        $(document).ready(function () {
+            $(".ibox .tab").click(function () {
+                $(this).toggleClass("active");
+                $(this).next(".txt").toggleClass("active");
+            });
+        });
+
+        function ToMyProfile(idExterno) {
+             window.location.href = `/tag_SOS/${idExterno}/`;
+        }
+
+        function PhoneNumberSelect() {
+
+                window.location.href = 'tel:993256817';
+
+        }
+
+        function GotoLocation() {
+        layui.use('layer', function () {
+        var layer = layui.layer;
+
+        layer.open({
+            type: 1,
+            title: 'Enviar ubicación y notificar al dueño',
+            area: ['90%', '300px'],
+            content: `
+                <div style="padding: 20px;">
+                    <textarea id="locationText" class="layui-textarea" placeholder="Escribe un mensaje (opcional)..." rows="4"></textarea>
+                    <div style="margin-top: 15px; text-align: right;">
+                        <button type="button" class="layui-btn layui-btn-primary" id="cancelBtn">Cancelar</button>
+                        <button type="button" class="layui-btn" id="confirmBtn">Enviar</button>
+                    </div>
+                </div>
+            `,
+            success: function(layero, index) {
+                document.getElementById('cancelBtn').onclick = function() {
+                    layer.close(index);
+                };
+                document.getElementById('confirmBtn').onclick = function() {
+                    var locationText = document.getElementById("locationText").value;
+                    SendLocation(locationText);
+                    layer.close(index);
+                };
+            }
+        });
+    });
+    }
+
+        function SendLocation(locationText) {
+         console.log('Estoy entrando');
+            if (navigator.geolocation) {
+                // Obtener las coordenadas del usuario
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Crear el objeto JSON con el id y las coordenadas
+                    const jsonData = {
+                        "id_mascotas": {{mascota.id_mascotas}},  // Ejemplo de ID que se enviará al backend
+                        "lat": position.coords.latitude,  // Latitud
+                        "lon": position.coords.longitude  // Longitud
+                    };
+
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    // Hacer la solicitud POST con el JSON
+                    fetch('/sendnotification/', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken  // el mismo token que usás en jQuery
+                      },
+                      body: JSON.stringify(jsonData)
+                    })
+                    .then(response => {
+                      if (!response.ok) {
+                        return response.text().then(text => { throw new Error(text); });
+                      }
+                      return response.json();  // asumimos que el backend responde con JSON
+                    })
+                    .then(data => {
+                      layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.open({
+                          title: 'Respuesta',
+                          content: data.message,
+                          btn: ['Cerrar'],
+                          yes: function(index) {
+                            layer.close(index);
+                          }
+                        });
+                      });
+                      document.getElementById('resultado').innerText = data.resultado;
+                    })
+                    .catch(error => {
+                      document.getElementById('resultado').innerText = "Error: " + error.message;
+                    });
+
+                }, function(error) {
+                    // En caso de que no se pueda obtener la geolocalización
+                    document.getElementById('resultado').innerText = "Error al obtener las coordenadas: " + error.message;
+                });
+            } else {
+                // En caso de que el navegador no soporte geolocalización
+                document.getElementById('resultado').innerText = "La geolocalización no está soportada en este navegador.";
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    function SendInitialLocation(lat, lng) {
+    // Crear el objeto JSON con el id y las coordenadas
+        const jsonData = {
+            "id_mascotas": {{mascota.id_mascotas}},  // Ejemplo de ID que se enviará al backend
+            "lat": lat,  // Latitud
+            "lon": lng  // Longitud
+        };
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
+        // Ejemplo de envío vía FETCH()
+
+        fetch('/sendnotification/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          },
+          body: JSON.stringify(jsonData)
+        })
+        .then(response => {
+          if (!response.ok) {
+            return response.text().then(text => { throw new Error(text); });
+          }
+          return response.json();  // o .text() si esperás texto plano
+        })
+        .then(data => {
+          console.log('Ubicación enviada con éxito');
+        })
+        .catch(error => {
+          console.error('Error al enviar la ubicación:', error.message);
+        });
+
+    }
+
+    function initMap() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    console.log("Coordenadas:", lat, lng); // Debug
+
+                    // Llama a tu función con los datos reales
+                    SendInitialLocation(lat, lng);
+                },
+                (error) => {
+                    console.error("Error al obtener ubicación:", error);
+                }
+            );
+        } else {
+            console.warn("Geolocalización no es soportada por este navegador.");
+        }
+    }
+
+    // Ejecuta al cargar el DOM
+    $(document).ready(function () {
+        initMap();
+    });
+
+        </script>
+
+
+</body>
+
+</html>
+<style>
+    .phonedia{padding:15px 0}
+    .phonedia a{display:flex;align-items:center;justify-content:center;font-size:0.5rem;}
+    .phonedia .telicon{
+        margin-left:15px;
+        background-image:url('"{%static 'assets/img/telicon.png');
+        background-size:1rem 1rem;
+        height:1rem;width:1rem;
+    }
+    .phonedia .close {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        font-size: 30px;
+    }
+</style>

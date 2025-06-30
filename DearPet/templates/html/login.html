@@ -1,0 +1,116 @@
+{% extends "html/template.html" %}
+
+{% block title %}login{% endblock %}
+
+{% block body %}
+<style>
+    .bg-login-image {
+        background: url(https://source.unsplash.com/K4mSJ7kc0As/600x800);
+        background-position: center;
+        background-size: cover;
+    }
+
+
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6e707e;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d1d3e2;
+        border-radius: .35rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-control-user {
+        font-size: .8rem;
+        border-radius: 10rem;
+        padding: 1.5rem 1rem;
+    }
+
+    button,
+    input {
+        overflow: visible;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+    .btn-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: .75rem 1rem;
+    display: block;
+    width: 100%;
+}
+#hero h1{
+    color:black;
+}
+</style>
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+                                    </div>
+                                    <form method="post" class="cien" autocomplete="off">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="email" name="email"
+                                                placeholder="Email" required>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user" type="password"
+                                                name="contrasena" placeholder="******" required>
+                                        </div>
+                                        <br>
+                                        <button class="btn btn-primary btn-user btn-block">
+                                            Iniciar sesion
+                                        </button>
+                                    </form>
+                                    {% if t == "v1" %}
+                                    <a href="{% url 'crearveterinario'%}">¿No tienes cuenta? Cree Una</a>
+                                    {%else%}
+                                    <div class="text-center">
+                                        <a class="small" href="{% url 'crearusuario'%}">¿No tienes cuenta? Cree Una</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="{% url 'recuperar'%}">¿Olvido su contraseña? Recuperela
+                                            aqui</a>
+                                    </div>
+                                    {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

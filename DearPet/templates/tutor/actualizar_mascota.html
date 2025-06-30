@@ -1,0 +1,40 @@
+{% extends "tutor/home.html" %}
+{%load static%}
+
+{% block tutor %}
+<div class="page-content">
+    <!-- Page title -->
+    <div class="page-title">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h5 class="h3 font-weight-400 mb-0 text-white">Actualizar Mascota</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-7 d-sm-flex flex-sm-column">
+            <div class="row flex-sm-fill">
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text"class="form-control" style="margin-bottom: 20px; margin-top: 50px;"  name="nombre" placeholder="Nombre" value="{{form.nombre.value}}">
+                <input type="date" class="form-control" style="margin-bottom: 20px;" name="fchnacimiento" placeholder="Nacimiento" value="{{ form.fchnacimiento.value }}">
+
+                <input type="text" class="form-control"style="margin-bottom: 20px;" name="descripcion" placeholder="Descripcion"value="{{form.descripcion.value}}">
+                
+                <input hidden type="text" name="extraviada" value="0">
+
+
+                <select style="margin-bottom: 20px;" name="raza_id_raza" id="raza_id_raza" class="form-control">
+                    {% for raza_option in raza %}
+                        <option value="{{ raza_option.id_raza }}" {% if raza_option == raza_db %}selected{% endif %}>
+                            {{ raza_option }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <input style="margin-bottom: 100px;" type="file" name="imagen" accept="image/*" value="{{form.foto.value}}">
+                {{form.errors}}
+                <button class="btn btn-primary " type="submit">Guardar</button>
+            </form>
+
+{%endblock%}

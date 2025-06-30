@@ -1,0 +1,36 @@
+{% extends "html/template.html" %}
+
+
+{% block body %}
+<div style="margin-top: 100px;">
+
+</div>
+
+<div class="col-10" style=" background-color: rgb(229 231 233);
+                            margin: auto;
+                            padding: 30px;
+                            text-align: center;
+                            border-radius: 50px;">
+    <div class="col-10 spr" style="margin:auto auto;">
+        <h1>Terminos Y Condiciones</h1>
+        <div style="margin-top: 30px;">
+            <p>Política de Privacidad y Condiciones de Uso del Sitio Dearpet.io</p>
+            <p>Fecha de entrada en vigencia: octubre 2023</p>
+
+        </div>
+
+        <div class="card-body">
+            {%for poli in politicas%}
+            <h5 class="card-title">{{poli.titulo}}</h5>
+            <p class="card-text">{{poli.descripcion}}</p>
+            {% if poli.url != None %}
+            <img style="max-height: 20px;" src="{{poli.url}}" alt="">
+            {%endif%}
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

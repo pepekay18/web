@@ -1,0 +1,37 @@
+{% extends "html/template.html" %}
+
+{% block title %}inicio{% endblock %}
+
+{% block body %}
+  
+        <div class="col-md-7 margin  center row">
+            <h1 class="center">Registro mascota</h1>
+            <div class="mb-3 col-6 ">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" pattern="^[a-zA-Z]+$" required>
+                <label for="fchnacimiento" class="form-label">fecha nacimiento:</label>
+                <input type="date" class="form-control" name="fchnacimiento" id="fchnacimiento" pattern="^[a-zA-Z]+$"
+                    required>
+
+                <label for="descripcion" class="form-label">descripcion:</label>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" pattern="^[a-zA-Z]+$"
+                    required>
+            </div>
+            <div class="mb-3 col-6">
+                
+                <label for="foto" class="form-label">foto:</label>
+                <input type="file" class="form-control" name="foto" id="foto" pattern="^[a-zA-Z]+$" required>
+                <label for="foto" class="form-label">Tipo:</label>
+                <select name="raza" id="raza" class="form-control" >
+                    {%for n in tipo_mascota%}
+                        <option>{{n.descripcion}}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

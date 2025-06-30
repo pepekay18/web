@@ -1,0 +1,15 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+    <h2>Formulario de Preguntas Frecuentes</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="pregunta">{{ form.pregunta.value }}</textarea>
+        <textarea name="respuesta">{{ form.respuesta.value }}</textarea>
+        <button type="submit">Guardar</button>
+    </form>
+
+{%endblock%}

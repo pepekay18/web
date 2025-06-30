@@ -1,0 +1,106 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Politicas</h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="mi_tabla">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Descripcion</th>
+                        <th>URL</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in form %}
+                    {%if form.eliminado == 0 %}
+                    <tr>
+
+                        <td>{{ form.descripcion }}</td>
+                        <td>{{ form.url }}</td>
+
+                        <td>
+
+                            <a href="quienes-somos-actualizar/{{form.id}}" class="btn btn-success"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+
+                            <a href="quienes-somos-eliminar/{{form.id}}" class="btn btn-danger"><i
+                                    class="fa-solid fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {% endfor %}
+                </tbody>
+                <tfoot class="table-dearpet">
+                    <tr>
+                        <th>Descripcion</th>
+                        <th>URL</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="card-footer">
+            {% if quienes_pagina.has_other_pages %}
+            <div class="pagination margin" style="width: 250px;">
+                {% if quienes_pagina.has_previous %}
+                <a class="btn btn-primary " href="?page={{ quienes_pagina.previous_page_number }}"><i
+                        class="fa-solid fa-arrow-left"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i></a>
+                {% endif %}
+                {% for i in quienes_pagina.paginator.page_range %}
+                {% if quienes_pagina.number == i %}
+                <a class="btn btn-primary">{{ i }}</a>
+                {% else %}
+                <a class="btn btn-primary" href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if quienes_pagina.has_next %}
+                <a class="btn btn-primary" href="?page={{ quienes_pagina.next_page_number }}"><i
+                        class="fa-solid fa-arrow-right"></i></a>
+                {% else %}
+                <a class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    new DataTable('#mi_tabla', {
+        info: false,
+        ordering: true,
+        paging: false,
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,450 @@
+{% extends "tutor/home.html" %}
+{% load static %}
+
+{% block tutor %}
+
+    <!-- Page title -->
+    <div class="tag-cc profile-cc" style="padding:0 0.1rem;">
+        <div class="ww" style="background: #fff; padding:0.5rem 0; border-radius: 0.6rem; margin-top:0.5rem;">
+        <form class="layui-form" id="form" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="">
+            <div class="">
+            <div class="" id="page-1">
+            <div class="profile-list">
+            <div class="layui-form-item clearfix" style="margin-top:1rem;">
+                <label class="layui-form-label" style="text-align: left; font-size: 0.42rem; color: #000; margin-top: 0.3rem; padding:0;">Foto</label>
+                <div class="layui-input-block">
+                    <input name="PetPhoto" id="PetPhoto" value="{{mascota.foto}}"/>
+                </div>
+            </div>
+            <!-- Pet Type -->
+            <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+                <span style="color: #888; font-size: 0.42rem; flex: 1; padding: 0.2rem;">Tipo Mascota:</span>
+                <select style="margin-bottom: 20px;" name="tipo_id" id="id_tipo" lay-filter="tipo_mascota">
+                <option value="" disabled selected>Seleccione un tipo</option>
+                {% for t in tipo %}
+                <option value="{{ t.id_tipo_mascota }}" {% if id_tipo_mascota.id_tipo_mascota == t.id_tipo_mascota %}selected{% endif %}>{{ t.descripcion }}</option>
+
+                {% endfor %}
+                <span class="error" id="error-id_tipo" style="color:red; font-size: 0.35rem;"></span>
+            </select>
+            </div>
+
+            <!-- Name -->
+            <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+                <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;" onclick="FocusOnInput('PetName')">Nombre de mascota:</span>
+                <div style="flex:1;">
+                    <input type="text" class="custom-input" id="PetName" name="PetName" maxlength="50">
+                </div>
+                <span class="error" id="error-PetName" style="color:red; font-size: 0.35rem;"></span>
+            </div>
+
+            <!-- breed -->
+            <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+               <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;" onclick="FocusOnInput('raza_id_raza')">Raza:</span>
+                <select style="margin-bottom: 20px;" name="raza_id_raza" id="raza_id_raza">
+                    <option value="" disabled selected> </option>
+                </select>
+                <span class="error" id="error-raza_id_raza" style="color:red; font-size: 0.35rem;"></span>
+            </div>
+
+            <!-- Gender -->
+            <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+                <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;">Genero:</span>
+                <select style="margin-bottom: 20px;" name="genero" >
+                    <option value="" disabled selected> </option>
+                    <option value="1">Macho</option>
+                    <option value="2">Hembra</option>
+                </select>
+                <span class="error" id="error-genero" style="color:red; font-size: 0.35rem;"></span>
+            </div>
+            <!-- Birth Date -->
+            <div style="display: flex; border-bottom: 2px solid #ddd; align-items: center; height:1.2rem;" onclick="OpenBirthDate()">
+                <span style="color: #888; font-size: 0.42rem; flex: 1; padding: 0.2rem;" onclick="OpenBirthDate()">Fecha de nacimiento:</span>
+                <div style="flex: 1; position:relative;" onclick="OpenBirthDate()">
+                    <select id="BirthDateSelect" name="BirthDateSelect" disabled="">
+                        <option value="0">&nbsp;</option>
+                    </select>
+                    <input type="date" id="BirthDate" name="BirthDate" value="" onchange="handleDateChange(event)" style="background: #fff; color:#000; border:hidden; padding: 0.2rem 0.2rem 0.2rem 0.1rem; width:85%;height:1rem; z-index: 1; position:absolute; top:0.1rem;">
+                    <span class="error" id="error-BirthDate" style="color:red; font-size: 0.35rem;"></span>
+                </div>
+            </div>
+            <!-- Age -->
+            <div style="display: flex; border-bottom: 2px solid #ddd; align-items: center; height:1.2rem;">
+                <span style="color: #888; font-size: 0.4rem; flex: 1; padding: 0.2rem;" onclick="FocusOnInput('Age')">Edad de la mascota:</span>
+                <div style="flex: 1;">
+                    <input type="text" id="Age" name="Age" value="" class="custom-input" maxlength="50">
+                </div>
+            </div>
+            <!-- Description-->
+            <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+                <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;" onclick="FocusOnInput('description')">Descripcion:</span>
+                <div style="flex:1;">
+                <input class="custom-input" id="description" name="descripcion" placeholder="" maxlength="50">
+                </div>
+            </div>
+
+            <input type="hidden" name="eliminado" value="0">
+            <input type="hidden" name="id_externo" value= "{{id_externo}}">
+            <input type="hidden" name="id_mascotas" value= "{{id_mascotas}}">
+
+                <input hidden type="text" class="form-control form-usu" style="margin-bottom: 20px;" name="extraviada" value="0"
+                        placeholder="extraviada">
+                <input hidden type="text" name="usuarios_id_usuarios" value="{{nickname}}">
+            <!--vacunada-->
+            <div style="display: flex; border-bottom: 2px solid #ddd; align-items: center; height:1.2rem;">
+                <span style="color: #888; font-size: 0.4rem; flex: 1; padding:0.2rem;">Vacunada:</span>
+                <div style="flex: 1; display:flex; align-items:center;">
+                    <div style="font-size: 0.42rem;margin-left: 0.2rem;">Sí</div>
+                    <div id="VacunadaYes" onclick="SelectVacunada(1)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="vcyes">✓</div>
+                    </div>
+                    <div style="font-size: 0.42rem; margin-left: auto;">No</div>
+                    <div id="VacunadaNo" onclick="SelectVacunada(2)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="vcno"><!--✔-->✓</div>
+                    </div>
+                </div>
+                <input type="hidden" name="vacunada" id="inputVacunada" value="0">
+            </div>
+             <!--Sterilization-->
+            <div style="display: flex; border-bottom: 2px solid #ddd; align-items: center; height:1.2rem;">
+                <span style="color: #888; font-size: 0.4rem; flex: 1; padding:0.2rem;">Esterilizada:</span>
+                <div style="flex: 1; display:flex; align-items:center;">
+                    <div style="font-size: 0.42rem;margin-left: 0.2rem;">Sí</div>
+                    <div id="SterilizationYes" onclick="SelectSterilization(1)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="styes">✓</div>
+                    </div>
+                    <div style="font-size: 0.42rem; margin-left: auto;">No</div>
+                    <div id="SterilizationNo" onclick="SelectSterilization(2)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="stno"><!--✔-->✓</div>
+                    </div>
+                </div>
+                <input type="hidden" name="sterilization" id="inputSter" value="0">
+            </div>
+
+            <!--Alergias-->
+            <div style="display: flex; border-bottom: 2px solid #ddd; align-items: center; height:1.2rem;">
+                <span style="color: #888; font-size: 0.4rem; flex: 1; padding:0.2rem;">Alergias:</span>
+                <div style="flex: 1; display:flex; align-items:center;">
+                    <div style="font-size: 0.42rem;margin-left: 0.2rem;">Sí</div>
+                    <div id="AlergiaYes" onclick="SelectAlergias(1)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="alyes">✓</div>
+                    </div>
+                    <div style="font-size: 0.42rem; margin-left: auto;">No</div>
+                    <div id="AlergiaNo" onclick="SelectAlergias(2)" style="width:0.8rem; height:0.8rem; border:2px solid #898989; border-radius:10px; margin-left:0.2rem; display:flex; align-items:center; justify-content:center;">
+                        <div style="font-size: 0.42rem; font-weight:bold; display:none; color:white;" id="alno">✓</div>
+                    </div>
+                </div>
+                <input type="hidden" name="alergia" id="inputAlergia" value="0">
+            </div>
+                    <button class="btn btn-primary " type="submit">Guardar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<script>
+layui.use(['form'], function(){
+  var form = layui.form;
+
+  form.on('select(tipo_mascota)', function(data) {
+    const tipoId = data.value;
+    const razaSelect = document.getElementById('raza_id_raza');
+
+    razaSelect.innerHTML = '<option value="" disabled selected>Selecciona una raza</option>';
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/allrazastipomascota/${tipoId}`, {
+      method: 'GET',
+      headers: {
+        'X-CSRFToken': csrfToken
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(raza => {
+          const option = document.createElement('option');
+          option.value = raza.id;
+          option.textContent = raza.descripcion;
+          razaSelect.appendChild(option);
+        });
+        form.render('select');
+      });
+  });
+});
+</script>
+
+<script type="text/javascript">
+
+    var tshowtit = document.getElementById('tshowtit');
+    if (tshowtit) {
+        tshowtit.innerHTML = "Mascota";
+    }
+     $(document).ready(function () {
+        $(".ico-pos").click(function () {
+            $.modal({
+                title: "",
+                text: `Ingrese su dirección buscando en el mapa.`,
+                buttons: [
+                    { text: `Cancelar`, className: "default" },
+                        { text: `OK`, className: "comfirm", onClick: function () { getInitLocation(); } },
+                ]
+            });
+        });
+            text_ok = `OK`;
+            text_cancel = "Cancelar";
+            text_crop = "Recortar la imagen";
+            text_del = "¿Estás seguro de eliminar esta foto?";
+
+            $("#PetPhoto").FrontImg();
+        });
+
+    function handleDateChange(event) {
+        var birthDateInput = event.target.value;
+        if (birthDateInput == "") {
+            var Age = document.getElementById("Age");
+            if (Age) {
+                Age.value = ""
+            }
+        }
+        else {
+            var currentDate = new Date();
+            var birthDate = new Date(birthDateInput);
+
+            var age = currentDate.getFullYear() - birthDate.getFullYear();
+            var monthDiff = currentDate.getMonth() - birthDate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            var Age = document.getElementById("Age");
+            if (Age) {
+                if (age < 0) {
+                    Age.value = 0;
+                } else {
+                    Age.value = age;
+                }
+            }
+        }
+    }
+
+    function OpenBirthDate() {
+        var BirthDate = document.getElementById("BirthDate");
+        if (BirthDate) {
+            BirthDate.click();
+        }
+    }
+
+    var Vacunada = 1;
+    var Sterilization = 1;
+    var Alergia = 1;
+
+    if (Sterilization == 1) {
+            var SterilizationYes = document.getElementById("SterilizationYes");
+            var SterilizationNo = document.getElementById("SterilizationNo");
+            var styes = document.getElementById("styes");
+            var stno = document.getElementById("stno");
+
+            if (SterilizationYes && SterilizationNo) {
+                SterilizationYes.style.borderColor = "#4cbc11";
+                SterilizationYes.style.background = "#4cbc11";
+                SterilizationNo.style.borderColor = "#898989";
+                SterilizationNo.style.background = "#fff";
+                if (styes) {
+                    styes.style.display = "";
+                }
+            }
+        }
+    if (Vacunada == 1) {
+            var VacunadaYes = document.getElementById("VacunadaYes");
+            var VacunadaNo = document.getElementById("VacunadaNo");
+            var vcyes = document.getElementById("vcyes");
+            var vcno = document.getElementById("vcno");
+
+            if (VacunadaYes && VacunadaNo) {
+                VacunadaYes.style.borderColor = "#4cbc11";
+                VacunadaYes.style.background = "#4cbc11";
+                VacunadaNo.style.borderColor = "#898989";
+                VacunadaNo.style.background = "#fff";
+                if (vcyes) {
+                    vcyes.style.display = "";
+                }
+            }
+        }
+
+    if (Alergia == 1) {
+            var AlergiaYes = document.getElementById("AlergiaYes");
+            var AlergiaNo = document.getElementById("AlergiaNo");
+            var alyes = document.getElementById("alyes");
+            var alno = document.getElementById("alno");
+
+            if (AlergiaYes && AlergiaNo) {
+                AlergiaYes.style.borderColor = "#4cbc11";
+                AlergiaYes.style.background = "#4cbc11";
+                AlergiaNo.style.borderColor = "#898989";
+                AlergiaNo.style.background = "#fff";
+                if (alyes) {
+                    alyes.style.display = "";
+                }
+            }
+        }
+
+    function SelectSterilization(index) {
+            var SterilizationYes = document.getElementById("SterilizationYes");
+            var SterilizationNo = document.getElementById("SterilizationNo");
+            var styes = document.getElementById("styes");
+            var stno = document.getElementById("stno");
+            var input = document.getElementById("inputSter");
+            switch (index){
+                case 1:
+                    Sterilization = 1;
+                    if (input) input.value = "1";
+                    if (SterilizationYes && SterilizationNo) {
+                        SterilizationYes.style.borderColor = "#4cbc11";
+                        SterilizationYes.style.background = "#4cbc11";
+                        SterilizationNo.style.borderColor = "#898989";
+                        SterilizationNo.style.background = "#fff";
+                        if (styes && stno) {
+                            styes.style.display = "";
+                            stno.style.display = "none";
+                        }
+                    }
+                    break;
+                case 2:
+                    Sterilization = 0;
+                    if (input) input.value = "0";
+                    if (SterilizationYes && SterilizationNo) {
+                        SterilizationNo.style.borderColor = "#4cbc11";
+                        SterilizationNo.style.background = "#4cbc11";
+                        SterilizationYes.style.borderColor = "#898989";
+                        SterilizationYes.style.background = "#fff";
+                        if (styes && stno) {
+                            styes.style.display = "none";
+                            stno.style.display = "";
+                        }
+                    }
+                    break;
+            }
+        }
+
+        function SelectVacunada(index) {
+            var VacunadaYes = document.getElementById("VacunadaYes");
+            var VacunadaNo = document.getElementById("VacunadaNo");
+            //var MNDiv = document.getElementById("MNDiv");
+            var vcyes = document.getElementById("vcyes");
+            var vcno = document.getElementById("vcno");
+            var input = document.getElementById("inputVacunada");
+            switch (index) {
+                case 1:         //Yes
+                    Vacunada = 1;
+                    if (input) input.value = "1";
+                    if (VacunadaYes && VacunadaNo) {
+                        VacunadaYes.style.borderColor = "#4cbc11";
+                        VacunadaYes.style.background = "#4cbc11";
+                        VacunadaNo.style.borderColor = "#898989";
+                        VacunadaNo.style.background = "#fff";
+                       // MNDiv.style.display = "";
+                        if (vcyes && vcno) {
+                            vcyes.style.display = "";
+                            vcno.style.display = "none";
+                        }
+                    }
+                    break;
+                case 2:         //No
+                    Vacunada = 0;
+                    if (input) input.value = "0";
+                    if (VacunadaYes && VacunadaNo) {
+                        VacunadaNo.style.borderColor = "#4cbc11";
+                        VacunadaNo.style.background = "#4cbc11";
+                        VacunadaYes.style.borderColor = "#898989";
+                        VacunadaYes.style.background = "#fff";
+                       // MNDiv.style.display = "none";
+                        if (vcyes && vcno) {
+                            vcyes.style.display = "none";
+                            vcno.style.display = "";
+                        }
+                    }
+                    break;
+            }
+        }
+
+    function SelectAlergias(index) {
+            var AlergiaYes = document.getElementById("AlergiaYes");
+            var AlergiaNo = document.getElementById("AlergiaNo");
+            //var MNDiv = document.getElementById("MNDiv");
+            var alyes = document.getElementById("alyes");
+            var alno = document.getElementById("alno");
+            var input = document.getElementById("inputAlergia");
+            switch (index) {
+                case 1:         //Yes
+                    Alergia = 1;
+                    if (input) input.value = "1";
+                    if (AlergiaYes && AlergiaNo) {
+                        AlergiaYes.style.borderColor = "#4cbc11";
+                        AlergiaYes.style.background = "#4cbc11";
+                        AlergiaNo.style.borderColor = "#898989";
+                        AlergiaNo.style.background = "#fff";
+                       // MNDiv.style.display = "";
+                        if (alyes && alno) {
+                            alyes.style.display = "";
+                            alno.style.display = "none";
+                        }
+                    }
+                    break;
+                case 2:         //No
+                    Alergia = 0;
+                    if (input) input.value = "0";
+                    if (AlergiaYes && AlergiaNo) {
+                        AlergiaNo.style.borderColor = "#4cbc11";
+                        AlergiaNo.style.background = "#4cbc11";
+                        AlergiaYes.style.borderColor = "#898989";
+                        AlergiaYes.style.background = "#fff";
+                       // MNDiv.style.display = "none";
+                        if (alyes && alno) {
+                            alyes.style.display = "none";
+                            alno.style.display = "";
+                        }
+                    }
+                    break;
+            }
+        }
+</script>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(event) {
+    // Obtener los campos
+    const tipoMascota = document.getElementById("id_tipo").value;
+    const nombre = document.getElementById("PetName").value.trim();
+    const raza = document.getElementById("raza_id_raza").value;
+    const genero = document.querySelector("select[name='genero']").value;
+    const nacimiento = document.getElementById("BirthDate").value;
+    const edad = document.getElementById("Age").value.trim();
+    const descripcion = document.getElementById("description").value.trim();
+
+    // Validaciones básicas
+    let errores = [];
+
+    if (!tipoMascota) errores.push("Debe seleccionar el tipo de mascota.");
+    if (!nombre) errores.push("Debe ingresar un nombre.");
+    if (!raza) errores.push("Debe seleccionar una raza.");
+    if (!genero) errores.push("Debe seleccionar el género.");
+    if (!nacimiento) errores.push("Debe ingresar la fecha de nacimiento.");
+    // if (!edad) errores.push("Debe ingresar la edad.");
+    if (!descripcion) errores.push("Debe ingresar una descripción.");
+
+    if (errores.length > 0) {
+        event.preventDefault(); // Evita que se envíe el formulario
+        alert("Corrija los siguientes errores:\n\n" + errores.join("\n"));
+    }
+});
+</script>
+
+
+
+{% endblock %}

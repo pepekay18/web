@@ -1,0 +1,284 @@
+{% extends "html/template.html" %}
+
+{% block title %}Registrar Usuario{% endblock %}
+
+{% block body %}
+<style>
+    .bg-register-image {
+        background: url(https://source.unsplash.com/Mv9hjnEUHR4/600x800);
+        background-position: center;
+        background-size: cover;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6e707e;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d1d3e2;
+        border-radius: .35rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-control-user {
+        font-size: .8rem;
+        border-radius: 10rem;
+        padding: 1.5rem 1rem;
+    }
+
+    button,
+    input {
+        overflow: visible;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+    .btn-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: .75rem 1rem;
+    display: block;
+    width: 100%;
+    
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+#hero h1{
+    color:black;
+}
+</style>
+<section id="hero" class="d-flex align-items-center" style="margin-top: 68px;">
+    <div style="margin-top: 100px;" >
+
+        <div class="card o-hidden border-0 shadow-lg my-5" >
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Crea tu cuenta!</h1>
+                            </div>
+                            <form method="post" autocomplete="off" onsubmit="return do_ajax(this)">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" tabindex="1" class="form-control form-control-user"
+                                            placeholder="Nombre" name="nombre" id="nombre" pattern="^[a-zA-Z]+$"
+                                            required min="3" max="50">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" tabindex="2" class="form-control form-control-user"
+                                            placeholder="Primer Apellido" name="primer_apellido" id="primer_apellido"
+                                            pattern="^[a-zA-Z]+$" required min="3" max="100">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" tabindex="3" placeholder="direccion" name="direccion"
+                                            class="form-control form-control-user" id="location-input"
+                                            autocomplete="off"
+                                            pattern="^[^<>]*$" min="3" max="100">
+                                        <input hidden type="text" class="form-control form-control-user"
+                                            name="nombre_comuna" id="locality-input" />
+                                        <input hidden type="text" class="form-control form-control-user"
+                                            name="nombre_region" id="administrative_area_level_1-input" />
+                                        <input hidden type="text" class="form-control form-control-user"
+                                            name="nombre_pais" id="country-input" onchange="formatRut()" />
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="tel" tabindex="4" class="form-control form-control-user"
+                                            name="fono" placeholder="Telefono" id="fono" pattern="^\+[0-9]+$" required
+                                            min="12" max="12" title="Por favor, introduce un número de teléfono en el formato correcto, por ejemplo: +56945678900">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" tabindex="5" class="form-control form-control-user"
+                                            placeholder="RUT/DNI" name="rut" id="rut" pattern="^[^<>]*$"
+                                            oninput="formatRut()" min="7" max="10">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="email" tabindex="6" class="form-control form-control-user"
+                                            placeholder="Email" name="email" id="email"
+                                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required min="5"
+                                            max="100">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" tabindex="7" class="form-control form-control-user"
+                                            minlength="6" placeholder="Contraseña" name="contrasena" id="contrasena"
+                                            pattern="^[^<>]*$" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" tabindex="8" class="form-control form-control-user"
+                                            placeholder="Confirmar Contraseña" name="contrasena1" id="contrasena1"
+                                            pattern="^[^<>]*$" required>
+                                    </div>
+                                    <div class="alert alert-info text-center" role="alert">
+                                        La contraseña debe tener al menos una mayuscula, una minuscula, un numero y debe ser de largo 6
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-user btn-block">
+                                    Registrar
+                                </button>
+                                <hr>
+                                <div style="display: none;">
+                                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <i class="fab fa-google fa-fw"></i> Register with Google
+                                    </a>
+                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                    </a>
+                                </div>                                
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{% url 'login'%}">¿Ya tienes una cuenta? Inicia sesion!</a>
+                            </div>
+                            <div class="card-footer">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+    function validarFormulario() {
+        //lectura de cajas
+        let input_nombre = document.getElementById("nombre");
+        let input_primer_apellido = document.getElementById("primer_apellido");
+        let input_rut = document.getElementById("rut");
+        let input_fono = document.getElementById("fono");
+        let input_contrasena = document.getElementById("contrasena");
+        let input_contrasena1 = document.getElementById("contrasena1");
+        let input_email = document.getElementById("email");
+
+        //definicion de expresiones regulares
+        let validacion_nombres = /^[a-zA-Z]+$/;
+        let validacion_telefono = /^\+[0-9]+$/;
+        let validacion_tener = /[a-zA-Z0-9-]+/;
+        let validacion_notener = /^[^<>]*$/;
+        let validacion_correo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let validacion_password = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
+
+        if (input_contrasena.value.length < 6) {
+            mostrar("la contraseña tiene que tener por lo menos 6 caracteres")
+            return false;
+        }
+        if (!validacion_password.test(input_contrasena.value)) {
+            mostrar("La contraseña debe tener al menos una mayuscula, minuscula y un numero");
+            return false;
+        }
+        if (!validacion_nombres.test(input_nombre.value)) {
+            mostrar("El nombre debe contener solo letras.");
+            return false;
+        }
+        if (!validacion_nombres.test(input_primer_apellido.value)) {
+            mostrar("El primer apellido debe contener solo letras.");
+            return false;
+        }
+        /*if (input_rut.value.trim() !== "" && !rut.test(rut)) {
+            alert("El rut debe ser valido.");
+            return false;
+        }*/
+        if (!validacion_telefono.test(input_fono.value)) {
+            mostrar("El telefono debe ser valido.");
+            return false;
+        }
+
+        if (!validacion_notener.test(input_contrasena.value)) {
+            mostrar("La contraseña no debe contener los caracteres '<' o '>'.");
+            return false;
+        }
+        if (!validacion_notener.test(input_contrasena1.value)) {
+            mostrar("La contraseña no debe contener los caracteres '<' o '>'.");
+            return false;
+        }
+        if (!validacion_correo.test(input_email.value)) {
+            mostrar("El correo debe ser valido.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function mostrar(mensaje) {
+        const myModal = new bootstrap.Modal(document.getElementById('messageModal'), {});
+        let contenido_modal = document.querySelector("#messageModal .modal-body");
+        contenido_modal.innerHTML = mensaje;
+        myModal.show();
+    }
+
+    function do_ajax(form) {
+
+        if (validarFormulario()) {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    //Leer JSON
+                    let json = JSON.parse(xhr.responseText);
+                    mostrar(json.message);
+                    if (!isNaN(json.id) && json.id != 0) {
+                        setTimeout(() => {
+                            window.location = "/login";
+                        }, 5000);
+                    }
+
+                }
+            }
+            xhr.open("POST", form.action);
+            xhr.send(new FormData(form));
+        }
+        return false;
+    }
+
+    function validarRutChile(rut) {
+        return /^[0-9]+-[0-9Kk]$/.test(rut);
+    }
+
+
+    function formatRut() {
+        var pais = document.getElementById("country-input").value;
+
+        if (pais === "Chile") {
+            // Para RUT chileno, colocar guion antes del último dígito
+            input_rut.value = input_rut.value.replace(/[^\dKk]/g, '');
+            if (input_rut.value.length > 1) {
+                input_rut.value = input_rut.value.slice(0, input_rut.value.length - 1) + '-' + input_rut.value.slice(-1);
+            }
+        } else if (pais === "Argentina") {
+            // Para DNI argentino, máximo 8 dígitos sin guiones
+            input_rut.value = rut.replace(/[^\d]/g, '').slice(0, 8);
+        } else {
+            // Otros países, quitar guiones y dejar solo números
+            input_rut.value = rut.replace(/[^\d]/g, '');
+        }
+    }
+
+</script>
+{% endblock %}

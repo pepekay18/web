@@ -1,0 +1,476 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'sb-admin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'sb-admin/css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="{%static 'media/js/app.js'%}"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'administrador'%}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Dearpet Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'inicio'%}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Ir al sitio Dearpet</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sistema
+            </div>
+            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse0"
+                    aria-expanded="true" aria-controls="collapse0">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>{{nickname}}</span>
+                </a>
+                <div id="collapse0" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{%url 'logout'%}">Salir</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
+                    aria-expanded="true" aria-controls="collapse1">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Usuarios:</h6>
+                        <a class="collapse-item" href="{% url 'cusuarios' %}">Crear</a>
+                        <a class="collapse-item" href="{%url 'vusuarios'%}">Ver</a>
+                        <a class="collapse-item" href="#">Actualizar </a>
+                        <a class="collapse-item" href="#">Eliminar </a>
+                    </div>
+                </div>
+            </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                  aria-expanded="true" aria-controls="collapse2">
+                  <i class="fas fa-fw fa-cog"></i>
+                  <span>Mascota</span>
+              </a>
+              <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <h6 class="collapse-header">Mascota:</h6>
+                      <a class="collapse-item" href="{%url 'mascotas-crear'%}">Crear</a>
+                      <a class="collapse-item" href="{%url 'vmascotas'%}">Ver</a>
+                  </div>
+              </div>
+          </li>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                aria-expanded="true" aria-controls="collapse3">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Veterinario</span>
+            </a>
+            <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Veterinario:</h6>
+                    <a class="collapse-item" href="#">Crear</a>
+                    <a class="collapse-item" href="{%url 'vveterinarios'%}">Ver</a>
+                    <a class="collapse-item" href="#">Actualizar</a>
+                    <a class="collapse-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                aria-expanded="true" aria-controls="collapse4">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Token</span>
+            </a>
+            <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Token:</h6>
+                    <a class="dropdown-item" href="#">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                aria-expanded="true" aria-controls="collapse5">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Despachos</span>
+            </a>
+            <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Despachos:</h6>
+                    <a class="dropdown-item" href="#">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse6"
+                aria-expanded="true" aria-controls="collapse6">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Perfiles</span>
+            </a>
+            <div id="collapse6" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Perfiles:</h6>
+                    <a class="dropdown-item" href="#">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7"
+                aria-expanded="true" aria-controls="collapse7">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Tipo Usuario</span>
+            </a>
+            <div id="collapse7" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Tipo Usuario:</h6>
+                    <a class="dropdown-item" href="#">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse8"
+                aria-expanded="true" aria-controls="collapse8">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Preguntas Frecuentes</span>
+            </a>
+            <div id="collapse8" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Preguntas Frecuentes:</h6>
+                    <a class="dropdown-item" href="{%url 'vpreguntas'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'preguntas-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse9"
+                aria-expanded="true" aria-controls="collapse9">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Políticas de privacidad</span>
+            </a>
+            <div id="collapse9" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Políticas de privacidad:</h6>
+                    <a class="dropdown-item" href="{%url 'vpoliticas'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'politicas_crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+           <!-- Nav Item - Pages Collapse Menu -->
+           <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse10"
+                aria-expanded="true" aria-controls="collapse10">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Promociones</span>
+            </a>
+            <div id="collapse10" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Promociones:</h6>
+                    <a class="dropdown-item" href="{%url 'vpromociones'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'promociones-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse11"
+                aria-expanded="true" aria-controls="collapse11">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Quienes somos</span>
+            </a>
+            <div id="collapse11" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Quienes somos:</h6>
+                    <a class="dropdown-item" href="{%url 'vquienes'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'quienes-somos-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse12"
+                aria-expanded="true" aria-controls="collapse12">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Banner</span>
+            </a>
+            <div id="collapse12" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Banner:</h6>
+                    <a class="dropdown-item" href="{%url 'mostrar_banner'%}">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse13"
+                aria-expanded="true" aria-controls="collapse13">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Imagen banner</span>
+            </a>
+            <div id="collapse13" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Imagen banner:</h6>
+                    <a class="dropdown-item" href="{%url 'vimagenes-banner'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'imagenesbanner-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse14"
+                aria-expanded="true" aria-controls="collapse14">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Imágenes</span>
+            </a>
+            <div id="collapse14" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Imágenes:</h6>
+                    <a class="dropdown-item" href="{%url 'vimagenes'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'imagenes-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse15"
+                aria-expanded="true" aria-controls="collapse15">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Ficha mascota</span>
+            </a>
+            <div id="collapse15" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Ficha mascota:</h6>
+                    <a class="dropdown-item" href="#">Ver</a>
+                    <a class="dropdown-item" href="#">Crear</a>
+                    <a class="dropdown-item" href="#">Editar</a>
+                    <a class="dropdown-item" href="#">Eliminar</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse16"
+                aria-expanded="true" aria-controls="collapse16">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Ventas</span>
+            </a>
+            <div id="collapse16" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Ventas:</h6>
+                    <a class="dropdown-item" href="{%url 'vventas'%}">Ver</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse17"
+                aria-expanded="true" aria-controls="collapse17">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Detalle Ventas</span>
+            </a>
+            <div id="collapse17" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Detalle Ventas:</h6>
+                    <a class="dropdown-item" href="{%url 'vdetalleventas'%}">Ver</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse18"
+                aria-expanded="true" aria-controls="collapse18">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Productos</span>
+            </a>
+            <div id="collapse18" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Productos:</h6>
+                    <a class="dropdown-item" href="{%url 'vproductos'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'productos-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse19"
+                aria-expanded="true" aria-controls="collapse19">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Terminos Y Condiciones</span>
+            </a>
+            <div id="collapse19" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Terminos Y Condiciones:</h6>
+                    <a class="dropdown-item" href="{%url 'vterminos'%}">Ver</a>
+                    <a class="dropdown-item" href="{%url 'terminos-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse20"
+                aria-expanded="true" aria-controls="collapse20">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Nuestra Tecnologias</span>
+            </a>
+            <div id="collapse20" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Nuestra Tecnologias:</h6>
+                    <a class="dropdown-item" href="{%url 'vtecnologia'%}">Ver</a>
+                    <a class="dropdown-item" href="{% url 'tecnologia-crear'%}">Crear</a>
+                </div>
+            </div>
+          </li>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+              
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                  {% block admin %}
+                  {% endblock %}
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Dearpet 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'sb-admin/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'sb-admin/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'sb-admin/js/sb-admin-2.min.js'%}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'sb-admin/vendor/chart.js/Chart.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'sb-admin/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'sb-admin/js/demo/chart-pie-demo.js'%}"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrhrHSopeKF592HZubllqmCQn2dksYs54&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cA"
+    async defer></script>
+</body>
+
+</html>

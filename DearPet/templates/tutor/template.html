@@ -1,0 +1,229 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Mascotas</title>
+    <link href="/static/iconos/ICONOS-16.png" rel="icon">
+<meta name="keywords" content>
+<meta name="description" content>
+<meta name="csrf-token" content="{{ csrf_token }}">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no">
+<script type="text/javascript" src="{%static 'assets/js/flexible.js'%}"></script>
+<style>@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:none}ins,a{text-decoration:none}</style>
+<link href="https://fonts.font.im/css?family=Nunito:300,400,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'assets/layui/css/layui.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/reset.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/swiper.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/animate.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/jquery-weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/layout.css'%}?v=6">
+<script type="text/javascript" src="{%static 'assets/js/jquery-1.9.1-min.js'%}"></script>
+<link href="{%static 'assets/css/icofont/icofont.css'%}" rel="stylesheet" />
+<script type="text/javascript" src="{%static 'assets/js/swiper.min.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/swiper.animate1.0.3.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/wow.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/jquery-weui.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/layui/layui.js'%}"></script>
+<script type="text/javascript" src="{%static 'js/Common.js'%}?v=123"></script>
+<script type="text/javascript" src="{%static 'assets/js/nav.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/login.js'%}?v=6"></script>
+<link href="{%static 'assets/js/just-tip.css'%}" rel="stylesheet">
+<script src="{%static 'assets/js/justTools.js'%}"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+<style scoped="">
+        .oneline{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .hidden{
+            display: none !important;
+        }
+        .taginav {
+            width: 100%;
+            position: fixed;
+            bottom: 0rem;
+            z-index: 9;
+            line-height: 0.64rem;
+            padding: 0.26rem 0 0;
+            text-align: center;
+            background: #f6f6f6
+        }
+        .taginavp {
+            width: 1.2rem;
+            display: inline-block;
+            margin: 0 0.56rem;
+        }
+        .taginavt {
+            width: 2.4rem;
+            display: inline-block;
+            margin: 0 0.56rem;
+        }
+        .tag-cc .tabcc .swiper-slide{
+            background: #e8e8e8;
+        }
+        .tag-cc .tabcate{
+            margin-bottom: 0rem;
+        }
+
+        .tag-cc .tabcate .swiper-slide.active-nav span{
+            padding: 0.36rem 0.36rem;
+            border-radius: 50%;
+        }
+        .tag-cc .tabcate .swiper-slide span{
+            padding: 0.36rem 0.36rem;
+            border-radius: 50%;
+        }
+        .swiper-wrapper{
+            background:#e8e8e8;
+        }
+        .dotnum{
+            border-radius: 50%;
+            background: #eb5c20;
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:#fff;
+            top:0;
+            right:0;
+        }
+        .tag-cc .tabcc .swiper-slide .list ul li .pos p{
+            margin: 0;
+            display: flex;
+            align-items:center;
+        }
+        .storagebtn_on{
+            background: #4cbc11;
+            color: #fff;
+            width:1.6rem;
+            white-space:nowrap;
+            text-align:center;
+        }
+        .storagebtn_off{
+            background: #e8e8e8;
+            color: #000;
+            width:1.6rem;
+            white-space:nowrap;
+            text-align:center;
+        }
+
+        .privacytips3 {
+            display: block;
+            border-radius: 50%;
+            border: 1px solid #999;
+            color: #999;
+            width: 0.48rem;
+            height: 0.48rem;
+            font-size: 0.36rem;
+            line-height: 0.48rem;
+            text-align: center;
+            margin-left: 0.2rem;
+        }
+    </style>
+
+</head>
+<body style="background: rgb(232, 232, 232); font-size: 15px;">
+<div id="logotop">
+    <div class="logoheader topbar active" style="background: #fff; color: #000;">
+        <div class="ww clearfix">
+            <div class="fl back"><a href="javascript:history.back();"><i class="icofont" style="color: #000;">&#xea74;</i></a></div>
+            <div class="fl tit"><span id="tshowtit"></span></div>
+        </div>
+    </div>
+</div>
+<script></script>
+<div class="mdiv" style="background: #f6f6f6;"></div>
+<div class="taginav">
+        <div style="display:flex; align-items: flex-end;justify-content:center;">
+            <div class="taginavp">
+                <a href="http://localhost:8000" style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="{%static 'imagenes/isologos DEARPET-03.png'%}">
+                    <span style="font-size: 0.36rem; white-space: nowrap;">Tienda oficial</span>
+                </a>
+            </div>
+            <div class="taginavt">
+                <div id="qr-reader" style="width: 300px;"></div>
+                <div onclick="AddPet()" style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="width: 1.6rem; height: 1.6rem; display: flex; justify-content: center; align-items: center;">
+                        <img src="{% static 'imagenes/add.png' %}" style="width: 1.4rem;">
+                    </div>
+                    <span style="font-size: 0.36rem;">Agregar Mascota</span>
+                </div>
+            </div>
+            <a href="#" class="taginavp">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="{% static 'imagenes/home.png' %}" style="width: 0.6rem;">
+                    <span style="font-size: 0.36rem;">home</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    {%block tutor%}
+    {% endblock %}
+</body>
+</html>
+
+<script>
+    function AddPet() {
+    const qrReader = new Html5Qrcode("qr-reader");
+
+    qrReader.start(
+        { facingMode: "environment" }, // cámara trasera
+        {
+            fps: 10,
+            qrbox: { width: 250, height: 250 }
+        },
+        (decodedText, decodedResult) => {
+            console.log("QR detectado:", decodedText);
+
+            // 🔴 Acá podés usar el texto como parámetro para lo que necesites:
+            validarCodigo(decodedText);
+
+            // 🔄 Detener el lector después de leer
+            qrReader.stop().then(() => {
+                document.getElementById("qr-reader").style.display = "none";
+            });
+        },
+        (errorMessage) => {
+            // errores silenciosos
+        }
+    ).catch(err => {
+        console.error("Error al iniciar el lector:", err);
+    });
+}
+
+function validarCodigo(textoQR) {
+    const qrUrl = textoQR;
+    const fullCode = qrUrl.split("/search_id/")[1];
+    fetch('/validarQR/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ qr: fullCode })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Respuesta del backend:", data);
+        if (data.id === 0) {
+            console.log("⚠️ QR DISPONIBLE: No está en uso.");
+            // redigir a alta de mascota
+            window.location.href = `/tutor/crear-mascotas/?id_externo=${encodeURIComponent(fullCode)}`;
+        } else if (data.id === 1) {
+            console.log("✅ QR NO disponible: Ya está asociado a una mascota.");
+            // Podés redirigir, mostrar datos, etc.
+        } else {
+            console.warn("⚠️ Código inesperado:", data.id);
+        }
+    })
+    .catch(err => console.error("Error al enviar:", err));
+}
+</script>

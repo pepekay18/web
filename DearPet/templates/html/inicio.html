@@ -1,0 +1,489 @@
+{% extends "html/template.html" %}
+{% load static %}
+{% block title %}inicio{% endblock %}
+
+{% block body %}
+<style>
+  .pay{
+    font-family: PaytoneOne;
+  }
+  .spr{
+    font-family: Fontspring;
+  }
+</style>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+        <img src="{% static 'media/imagenes/logo1.png' %}" class="img-fluid">
+        <h1><span class="spr">Todo para el cuidado de tu mascota en un solo lugar</span>!</h1>
+        <br><br><br>
+        <h2>
+          <a class="enlace_naranja spr" href="#">Conoce nuestra tecnologia</a>
+        </h2>
+      </div>      
+    </div>
+  </div>
+
+</section><!-- End Hero -->
+
+<div class="row " >
+  {%for i in productos%}
+  <div class="col-lg-3 col-sm-6" style="margin: 20px auto;">
+    <div class="card card-product" style="height:370px;">
+
+
+      <div class="card-body"style="height: 250px;">
+        <h2>{{i.nombre|safe}}</h2>
+        <h3>Características: </h3>
+        <p>{{i.caracteristicas|safe}}
+          
+        <div class="d-flex align-items-center mt-4">
+          <span class="h6 mb-0"><h5>${{i.precio}}</h5></span>
+          <span class="badge badge-success rounded-pill ml-auto">{%if i.stok > 0 %}En Stok{%else %} Sin Stok{%endif%} </span>
+        </div>
+
+    
+      </div>
+      <div class="card-footer" style="text-align: center;">
+
+
+          
+          <a href="{% url 'pro' i.id_productos %}" type="button"  class="buy-btn btn " style="background-color: var(--azul); color: white;" >
+            Ver Producto
+          </a>
+
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+
+</div>
+
+
+  <!-- ======= Why Us Section ======= -->
+  <section id="why-us" class="why-us section-bg">
+    <div class="container-fluid" data-aos="fade-up">
+
+      <div class="row">
+
+        <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+          <div class="content">
+            <h3>Software de gestion Veterinaria</strong></h3>
+            <p>
+              Agiliza procesos con nuestra app
+            </p>
+          </div>
+
+          <div class="accordion-list">
+            <ul>
+              <li>
+                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-15.png' %}"/></span>Agenda multifuncional<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                  <p>
+                    Organiza tus citas, programa recordatorios, utiliza el calendario para sacar estadísticas de atenciones, recordarles a los tutores de tus pacientes cuando corresponde control, próxima vacuna, desparasitar y mas.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-09.png' %}"/></span>Registro de pacientes<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                  <p>
+                    Lleva un registro completo de todas tus mascotas en su solo lugar, de fácil acceso en el teléfono móvil, tablet  y computador. 
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-12.png' %}"/></span>Ficha clinica<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                  <p>
+                    Predeterminada con un formato didáctico fácil de completar para agilizar el proceso de registro y no pasar por alto ningún dato o información importante. Y lo mejor de todo, si tu paciente es parte de la comunidad DearPet contactas su Tag ID y su perfil y ficha clinica quedan guardados en tus registros con un solo clic.  
+                  </p>
+                </div>
+              </li>
+              <li>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-10.png' %}"/></span>Registro de atenciones<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
+                    <p>
+                      En el perfil de cada una de tus mascotas quedaran registradas todas las atenciones realizadas en orden cronológico, con detalle de diagnostico, procedimientos, indicaciones y documentos asociados; como recetas, ordenes medicas, comprovantes, resultados de exámenes de imagen y laboratorio.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-14.png' %}"/></span>Recetas y ordenes medicas digitales<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
+                    <p>
+                      Ya no es necesario usar papel y llevar tu sello a todos lados, desde la aplicación puedes generar recetas, ordenes medicas digitales y compartirlas con tu pacientes y farmacias. Al generar la receta u orden desde el perfil de la mascota se rellenan de manera automática  los datos del paciente. También quedaran guardarlas en el historial del peludo.
+                    </p>
+                  </div>
+                </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("{% static 'media/imagenes/veterinario1.jpg'%}");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+      </div>
+
+    </div>
+  </section><!-- End Why Us Section -->
+
+  <!-- ======= Skills Section ======= -->
+  <section id="skills" class="skills" style="display:none">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
+          <img src="{% static 'media/assets/img/skills.png'%}" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+          <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+
+          <div class="skills-content">
+
+            <div class="progress">
+              <span class="skill">HTML <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">CSS <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">JavaScript <i class="val">75%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">Photoshop <i class="val">55%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Skills Section -->
+
+   <!-- ======= Pricing Section ======= -->
+   <section id="pricing" class="pricing section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Planes</h2>
+          <p>Selecciona el plan que mas se acomode a tus necesidades</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
+              <h3 style="font-size: 35px;">Plan Start:</h3>
+              <div style="height: 80%;">
+                <ul>
+                  <h3><strong>Ideal para profesionales veterinarios incursionando al mundo laboral o con una base de pacientes no mayor a 50 mascotas.</strong>  </h3>
+                  <li><h5><strong>Programación de citas</strong></h5></li>
+                  <li><h5><strong>Registro de atenciones</strong></h5></li>
+                  <li ><h5><strong>Estadísticas </strong></h5></li>
+                  <li ><h5></i> <strong>Avisos y recordatorios </strong></h5></li>
+                </ul>
+            </div>
+            <div style="text-align: center;">
+              <button type="button"  class="buy-btn btn " style="background-color: var(--azul);" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                ver plan
+              </button>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
+              <h3 style="font-size: 35px;">Plan Growth:</h3>
+              <div style="height: 80%;">
+              <ul>
+                <h3><strong>Destinado a Veterinarios con amplio historial de pacientes, capacidad para 200 registros.</strong>  </h3>
+                <li><h5><strong>Agenda Multifuncional</strong></h5></li>
+                <li><h5><strong>Registro de atenciones</strong></h5></li>
+                <li ><h5><strong>Estadísticas </strong></h5></li>
+                <li ><h5></i> <strong>Avisos y recordatorios</strong></h5></li>
+              </ul>
+              </div>
+              <div style="text-align: center;">
+                <button type="button"  class="buy-btn btn " style="background-color: var(--azul);" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                  ver plan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
+              <h3 style="font-size: 35px;">Plan Full:</h3>
+              <div style="height: 80%;">
+              <ul>
+                <h3><strong>Quieres estar conectados con todos los peludos sin limites de registros, este es el plan para ti.</strong>  </h3>
+                <li><h5><strong>Agenda Multifuncional</strong></h5></li>
+                <li><h5><strong>Programación de citas</strong></h5></li>
+                <li><h5><strong>Registro de atenciones</strong></h5></li>
+                <li ><h5><strong>Estadísticas </strong></h5></li>
+                <li ><h5></i> <strong>Avisos y recordatorios</strong></h5></li>
+              </ul>
+              </div>
+
+              <div style="text-align: center;">
+                <button type="button"  class="buy-btn btn " style="background-color: var(--azul);" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                  ver plan
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+
+  <!-- ======= Team Section ======= -->
+  <section id="team" class="team">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Avalado por nuestros usuarios</h2>
+        <p></p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="member d-flex align-items-start">
+            
+            <div class="member-info">
+              <h4>Walter White</h4>
+              <span>Veterinario</span>
+              <p>dearpet me ha ayudado a gestionar mejor mis pacientes y tener un mejor control</p>
+              <div class="social">
+                <a href="#"><i class="fa-regular fa-star"></i></a>
+                <a href="#"><i class="fa-regular fa-star"></i></a>
+                <a href="#"><i class="fa-regular fa-star"></i></a>
+                <a href="#"><i class="fa-regular fa-star"></i></a>
+                <a href="#"><i class="fa-regular fa-star"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="member d-flex align-items-start">
+            
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Veterinario</span>
+              <p>dearpet me ha ayudado a gestionar mejor mis pacientes y tener un mejor control</p>
+              <div class="social">
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 mt-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="member d-flex align-items-start">
+            
+            <div class="member-info">
+              <h4>William Anderson</h4>
+              <span>Tutor</span>
+              <p>Cuando pelusa se perdio me dearpet me ayudo a encontrarla mas facilmente</p>
+              <div class="social">
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 mt-4" data-aos="zoom-in" data-aos-delay="400">
+          <div class="member d-flex align-items-start">
+           
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Tutor</span>
+              <p></p>
+              <div class="social">
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+                  <a href="#"><i class="fa-regular fa-star"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Team Section -->
+
+  <section id="contacto">
+    <div class="container">
+
+      <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+              <!-- Nested Row within Card Body -->
+              <div class="row">
+                  <div class="col-lg-5 d-none d-lg-block">
+                    <img class="w-100" src="{% static 'media/imagenes/dearpet2.jpg' %}"/>
+                  </div>
+                  <div class="col-lg-7">
+                      <div class="p-5">
+                          <div class="text-center">
+                              <h1 class="h4 text-gray-900 mb-4">Contactenos</h1>
+                          </div>
+                          <form class="user" method="post" >
+                            {% csrf_token %}
+                              <div class="form-group row">
+                                  <div class="col-sm-12 mb-3 mb-sm-0">
+                                      <input required type="text" name="nombre" class="form-control form-control-user" id="contacto_nombre"
+                                          placeholder="Nombre">
+                                  </div>                                  
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-12">
+                                  <input required type="email" name="email" class="form-control form-control-user" id="contacto_correo"
+                                      placeholder="Email">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-12">
+                                  <textarea required name="mensaje" class="form-control form-control-user" id="contacto_mensaje"
+                                      placeholder="Cuentanos tu historia"></textarea>
+                                </div>
+                              </div>
+                              <button class="btn col-sm-12 btn-user btn-block btn-contacto">Enviar</button>
+                          </form>                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+  </section>
+</main><!-- End #main -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Plan Start:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Pagina de salud</h3>
+        <h5>Ficha Clinica</h5>
+        <h5>Historial de atensiones </h5>
+        <div class="row">
+          <h5>Documentos adjuntos <span style="font-size: 25px;"> <strong>5</strong></span> G</h5>
+        </div>
+        <h3><strong>Recetas y ordenes medicas dijitales.</strong></h3>
+        <h3><strong>Mapa Interactivo:</strong></h3>
+        <h4><strong>Migración de registros previos en Excel</strong></h4>
+        <h4><strong>Conexión via NFC y Qr que permite el intercambio de datos con las mascotas de la comunidad Dear Pet.</strong></h4>
+        <h5>$4.990 mas IVA. </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Comprar Plan</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Plan Growth </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Registros <span>Capacidad para <strong>200</strong> pacientes</span></h3>
+        <h5> Pagina de salud</h5>
+        <h5>Ficha Clinica</h5>
+        <h5>Historial de atenciones  </h5>
+        <div class="row">
+          <h5>Documentos adjuntos <span style="font-size: 25px;"> <strong>20</strong></span> G</h5>
+        </div>
+        <h3><strong>Recetas y ordenes medicas dijitales.</strong></h3>
+        <h3><strong>Mapa Interactivo:</strong></h3>
+        <h4><strong>Migración de registros previos en Excel</strong></h4>
+        <h4><strong>Conexión via NFC y Qr que permite el intercambio de datos con las mascotas de la comunidad Dear Pet.</strong></h4>
+        <h5>$9.990 mas IVA </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Comprar Plan</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Plan Growth </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Registros <span>Cupo  <strong>ILIMITADO</strong></span></h3>
+        <h5> Pagina de salud</h5>
+        <h5>Ficha Clinica</h5>
+        <h5>Historial de atenciones  </h5>
+        <div class="row">
+          <h5>Documentos adjuntos <span style="font-size: 25px;"> <strong>50</strong></span> G</h5>
+        </div>
+        <h3><strong>Recetas y ordenes medicas dijitales.</strong></h3>
+        <h3><strong>Mapa Interactivo:</strong></h3>
+        <h4><strong>Perfil publico personalizable</strong></h4>
+        <h4><strong>Migración de registros previos en Excel </strong></h4>
+        <h4><strong>Conexión via NFC y Qr que permite el intercambio de datos con las mascotas de la comunidad Dear Pet. </strong></h4>
+        <h5>$12.990 mas IVA </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Comprar Plan</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

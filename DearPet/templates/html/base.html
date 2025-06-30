@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+    <!-- Favicons -->
+    <link href="{%static 'media/assets/img/favicon.png'%}" rel="icon">
+    <link href="{%static 'media/assets/img/favicon.png'%}" rel="apple-touch-icon">
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="{%static 'media/assets/vendor/aos/aos.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/remixicon/remixicon.css'%}" rel="stylesheet">
+    <link href="{%static 'media/assets/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d5a0af1cbf.js" crossorigin="anonymous"></script>
+  
+    <!-- Template Main CSS File -->
+    <link href="{%static 'media/assets/css/style.css'%}" rel="stylesheet">  
+    <link href="{%static 'media/assets/css/estilos.css'%}" rel="stylesheet">
+  
+    <!-- =======================================================
+    * Template Name: Arsha
+    * Updated: Sep 18 2023 with Bootstrap v5.3.2
+    * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body background="{% static 'media/imagenes/Isologos DEARPET-08.png' %}">
+    <nav id="nav-principal" class="navbar navbar-expand-lg" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{%url 'inicio'%}"><img width="10%" src="{% static 'media/iconos/ICONOS_Mesa de trabajo 1.png' %}"/>Dear Pet</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">                    
+                    {% if request.session.token %}                   
+                            {% if request.session.id_perfil == 1 %}
+                            <li class="nav-item pull-right">
+                                <div class="dropdown">
+                                    <a class="btn btn-dearpet-secundario dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Mi Perfil
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{%url 'personal'%} ">Mascotas</a></li>
+                                        <li><a class="dropdown-item" href="{%url 'crear_mascota'%} ">Agregar mascotas</a></li>
+                                        <!--<li><a class="dropdown-item" href="#">actualizar perfil</a></li>-->
+                                    </ul>
+                                </div>
+                            </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{%url 'logout'%}">{{nickname}} Salir</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{%url 'prelogin'%}">Iniciar Sesion</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>    
+    <section class="cien">        
+    {% block body %}
+    {% endblock %}
+    </section>
+
+    <div class="footer">
+        <div class="row col-12">
+            <div class="col-sm-4">
+                <ul>
+                    <li>
+                        <a href="{% url 'nosotros'%}">Nosotros</a>
+                    </li>                
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul>
+                    <li>
+                        <a href="{% url 'funcionamiento'%}">Como funciona</a>
+                    </li>                    
+                    <li>
+                        <a href="{% url 'politicas'%}">Privacidad</a>
+                    </li>                   
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <ul>
+                    <li>
+                        <a href="{% url 'preguntas'%}">Utilidad</a>
+                    </li>                    
+                </ul>
+            </div>
+
+            <div class="col-sm-11" style="margin: auto;">
+                <div style="height: 1px; background-color: white;">
+
+                </div>
+
+            </div>
+            <div class="row col-sm-12">
+                <div class="col-sm-6">
+                    <p>¡Gracias por elegir DearPet para el cuidado de tus mascotas!</p>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#"></a><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"></a><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"></a><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <!-- Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrhrHSopeKF592HZubllqmCQn2dksYs54&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cA"
+        async defer></script>
+
+</body>
+<script src="{%static 'media/assets/vendor/aos/aos.js'%}"></script>
+<script src="{%static 'media/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{%static 'media/assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+<script src="{%static 'media/assets/vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+<script src="{%static 'media/assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+<script src="{%static 'media/assets/vendor/waypoints/noframework.waypoints.js'%}"></script>
+<script src="{%static 'media/assets/vendor/php-email-form/validate.js'%}"></script>
+
+<!-- Template Main JS File -->
+<script src="{%static 'media/assets/js/main.js'%}"></script>
+
+</html>
+{% if mensaje %}
+<script>
+    alert(JSON.parse('{{ mensaje | safe }}').message);
+</script>
+{%endif%}
+{% if mensage %}
+<script>
+    alert(('{{ mensage }}'));
+</script>
+{%endif%}
+{% if error_message %}
+<script>
+    alert(('{{ error_message }}'));
+</script>
+{% endif %}

@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html data-dpr="1" class="pixel-ratio-3 retina ios ios-16 ios-16-6 ios-gt-15 ios-gt-14 ios-gt-13 ios-gt-12 ios-gt-11 ios-gt-10 ios-gt-9 ios-gt-8 ios-gt-7 ios-gt-6" style="font-size: 54px;">
+<head>
+    <title>Mi Perfil SOS</title>
+
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no">
+<script type="text/javascript" src="/Tag/js/flexible.js"></script>
+<link href="https://fonts.font.im/css?family=Nunito:300,400,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'assets/layui/css/layui.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/reset.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/swiper.min.css'%}">
+
+<link rel="stylesheet" href="{%static 'assets/css/animate.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/jquery-weui.min.css'%}">
+<link rel="stylesheet" href="{%static 'assets/css/layout.css'%}?v=6">
+<script type="text/javascript" src="{%static 'assets/js/jquery-1.9.1-min.js'%}"></script>
+<link href="{%static 'assets/css/icofont/icofont.css'%}" rel="stylesheet" />
+<script type="text/javascript" src="{%static 'assets/js/swiper.min.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/swiper.animate1.0.3.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/wow.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/js/jquery-weui.min.js'%}"></script>
+<script type="text/javascript" src="{%static 'assets/layui/layui.js'%}"></script>
+<script type="text/javascript" src="{%static 'media/js/Common.js'%}?v=123"></script>
+<script type="text/javascript" src="{%static 'assets/js/nav.js'%}?v=6"></script>
+<script type="text/javascript" src="{%static 'assets/js/login.js'%}?v=6"></script>
+
+
+    <style scoped>
+        .thispos{
+            display:inline-block;
+            font-size:0.48rem;
+            color:#2460ae;
+        }
+        .hidden{
+            display:none !important;
+        }
+        .profile-cc .profile-list{
+            padding: 0.36rem 0.36rem 1.44rem;
+        }
+        .oneline {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body style="background:rgb(244, 245, 247);">
+
+<div id="logotop">
+    <div class="logoheader topbar" style="background: #fff; color: #000;">
+        <div class="ww clearfix">
+            <div class="fl back"><a href="javascript:history.back();"><i class="icofont" style="color: #000;">&#xea74;</i></a></div>
+            <div class="fl tit"><span id="tshowtit">Mi Perfil</span></div>
+        </div>
+    </div>
+</div>
+
+    <div class="mdiv"></div>
+
+    <div class="tag-cc profile-cc">
+        <div class="ww">
+            <div class="profile-list" style="margin-bottom:0;">
+                <div style="display:flex; justify-content:center; align-items:center;">
+                    <span class="oneline" style="width:90%; font-size:0.64rem; font-weight:bold; text-align:center;">
+                        {{mascota.nombre}}
+                    </span>
+                </div>
+                <div style="display:flex; justify-content:center; margin-top:0.3rem; margin: 0.3rem 0.5rem;">
+                    <span style="text-align:center;"> <!--border-bottom: 1px solid #000;-->
+                        {{mascota.raza_id_raza.descripcion}}&nbsp;/&nbsp;{% if mascota.genero == 1 %}
+                                                                                                                Macho
+                                                                                                           {% elif mascota.genero == 2 %}
+                                                                                                                Hembra
+                                                                                                           {% else %}
+                                                                                                                Desconocido
+                                                                                                           {% endif %}
+                    </span>
+                </div>
+
+                <div style="display:flex; justify-content:center;">
+                    <p style="text-align:center;">
+                        <i class="icofont thispos">&#x13b57;</i>
+
+
+                        <span style="border-bottom:1px solid #000;">Información de la Mascota</span>
+
+
+                    </p>
+                </div>
+            </div>
+
+            <!--Información del Contacto -->
+            <div style="margin-top: -1rem; background: #2460ae; padding-top: 0.3rem; border-radius: 0.24rem;">
+                <div style="display: flex; align-items: center; margin: 0 0.48rem; padding-bottom: 0.2rem;">
+                    <div style="width: 0.6rem;  height:0.6rem; display:flex; align-items:center;">
+                        <i class="icofont" style="color: #fff;">&#xec50;</i>
+                    </div>
+                    <div style="margin-left: 0.2rem;">
+                        <span style="color: #fff; font-size: 0.42rem;">Contacto</span>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <span style="color: #fff;" onclick="Expand1(this)" ><img id="Arrow1" src="{%static 'media/imagenes/arrow_drop_up.png'%}" style="width:0.6rem;" /></span>
+                    </div>
+                </div>
+
+                <div id="Passage1" style="background: #fff; padding-top: 0.5rem; padding-bottom: 0.8rem; border-bottom-right-radius: 0.24rem; border-bottom-left-radius: 0.24rem;">
+                    <div>
+                        <div class="" style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; border-bottom: 2px solid #ddd; ">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Nombre</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000;">{{mascota.usuarios_id_usuarios.nombre}} </span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;" class="False">Teléfono</span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div>
+                                            <span style="font-size: 0.42rem; color: #000;">{{mascota.usuarios_id_usuarios.fono}}</span>
+                                    </div>
+                                </div>
+                                <div style="width: 0.7rem; margin-left: auto;" class="False">
+                                        <a href='tel:{{usuario.fono}}'>
+                                            <i class="icofont" style="font-size: 0.50rem; color: #2460ae;">&#xec46;</i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden" style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;" class="True">Nombre</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;"></span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;" class="True">Teléfono</span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div>
+                                            <span style="font-size: 0.42rem; color: #000;"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 0.7rem; margin-left: auto;" class="True">
+                                            <a href='tel:'>
+                                        <img src="/Tag/images/contactphone.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Email</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <span style="font-size: 0.42rem; color: #000;">{{mascota.usuarios_id_usuarios.email}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 0.6rem;">
+                        <div style="margin: 0 0.36rem;">
+                            <span style="font-size: 0.4rem;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de la mascota -->
+            <div style="margin-top: 0.5rem; background: #fdca4f; padding-top: 0.3rem; border-radius: 0.24rem;">
+                <div style="display: flex; align-items: center; margin: 0 0.48rem; padding-bottom: 0.2rem;">
+                    <div style="width: 0.6rem; height:0.6rem; display:flex; align-items:center;">
+                        <i class="icofont" style="color: #fff;">&#x13b91;</i>
+                    </div>
+                    <div style="margin-left: 0.2rem;">
+                        <span style="color: #fff; font-size: 0.42rem;">Mascota</span>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <span style="color: #fff;" onclick="Expand2(this)" ><img id="Arrow2" src="{%static 'media/imagenes/arrow_drop_down.png'%}" style="width:0.6rem;" /></span>
+                    </div>
+                </div>
+
+                <div id="Passage2" style="background: #fff; padding-top: 0.5rem; padding-bottom: 0.8rem; border-bottom-right-radius: 0.24rem; border-bottom-left-radius: 0.24rem; display:none;">
+                    <div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Raza</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000;">{{mascota.raza_id_raza.descripcion}}</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;" class="False">Nombre</span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div><span style="font-size: 0.42rem; color: #000;">{{mascota.nombre}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;" >Genero</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;">{% if mascota.genero == 1 %}
+                                                                                                                Macho
+                                                                                                           {% elif mascota.genero == 2 %}
+                                                                                                                Hembra
+                                                                                                           {% else %}
+                                                                                                                Desconocido
+                                                                                                           {% endif %}</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;"></span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Fecha Nacimiento</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;">{{mascota.fchnacimiento}}</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;">Edad</span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Color</span></div>
+                                <div style="height: 0.2rem;"></div>
+                                <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;">{% if mascota.color == none %}
+                                                                                                                S/D
+                                                                                                           {% else %}
+                                                                                                                {{mascota.color}}
+                                                                                                           {% endif %}</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div>
+                                    <div><span style="font-size: 0.42rem; color: #888;">Sangre tipo</span></div>
+                                    <div style="height: 0.2rem;"></div>
+                                    <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="flex: 2">
+                                <div><span style="font-size: 0.42rem; color: #888;">Esterilizada</span></div>
+                            </div>
+                            <div style="flex: 3; display: flex; align-items: center;">
+                                <div><span style="font-size: 0.42rem; color: #000;">{% if mascota.esterilizada == 0 %}
+                                                                                                                NO
+                                                                                                           {% else %}
+                                                                                                                SI
+                                                                                                           {% endif %}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Información Clínica -->
+            <div style="margin-top: 0.5rem; background: #f76f46; padding-top: 0.3rem; border-radius: 0.24rem;" class="">
+                <div style="display: flex; align-items: center; margin: 0 0.48rem; padding-bottom: 0.2rem;">
+                    <div style="width: 0.6rem; height:0.6rem; display:flex; justify-content:center;">
+                        <i class="icofont" style="color: #fff;">&#xec27;</i>
+                    </div>
+                    <div style="margin-left: 0.2rem;">
+                        <span style="color: #fff; font-size: 0.42rem;">Datos Clínicos</span>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <span style="color: #fff;" onclick="Expand3(this)" ><img id="Arrow3" src="{%static 'media/imagenes/arrow_drop_down.png'%}" style="width:0.6rem;" /></span>
+                    </div>
+                </div>
+
+                <div id="Passage3" style="background: #fff; padding-top: 0.5rem; padding-bottom: 0.8rem; border-bottom-right-radius: 0.24rem; border-bottom-left-radius: 0.24rem; display:none;">
+                    <div>
+                        <div style="color: #000; font-size: 0.42rem; padding: 0.2rem 0.36rem; font-weight: bold;">Vacunada</div>
+
+                                <div style="display: flex; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                                    <div >
+                                        <div><span style="font-size: 0.42rem; color: #888;">{% if mascota.vacunada == 0 %}
+                                                                    NO
+                                                               {% else %}
+                                                                    SI
+                                                               {% endif %}</span></div>
+                                        <div style="height: 0.2rem;"></div>
+                                        <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;"></span></div>
+                                    </div>
+                                </div>
+
+
+                        <div style="color: #000; font-size: 0.42rem; padding: 0.2rem 0.36rem; font-weight: bold;">Desparasitada</div>
+                            <div style="display: flex; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                                    <div >
+                                        <div><span style="font-size: 0.42rem; color: #888;">{% if mascota.esterilizada == 0 %}
+                                                                    NO
+                                                               {% else %}
+                                                                    SI
+                                                               {% endif %}</span></div>
+                                        <div style="height: 0.2rem;"></div>
+                                        <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;"></span></div>
+                                    </div>
+                                </div>
+
+                        <div style="color: #000; font-size: 0.42rem; padding: 0.2rem 0.36rem; font-weight: bold;">Alergias</div>
+
+                                <div style="display: flex; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                                    <div >
+                                        <div><span style="font-size: 0.42rem; color: #888;">{% if mascota.alergias == 0 %}
+                                                                    NO
+                                                               {% else %}
+                                                                    SI
+                                                               {% endif %}</span></div>
+                                        <div style="height: 0.2rem;"></div>
+                                        <div><span style="font-size: 0.42rem; color: #000; margin-top: 0.2rem;"></span></div>
+                                    </div>
+                                </div>
+
+
+
+                        <div style="display: flex;flex-direction:column; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd; margin-top:0.5rem;">
+                            <div style="padding-left:0rem; padding-bottom:0.2rem;">
+                                <span style="font-size: 0.42rem; color: #888;">Disease</span>
+                            </div>
+                            <div>
+                                <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+                            <div style="padding-left: 0rem; padding-bottom: 0.2rem;">
+                                <span style="font-size: 0.42rem; color: #888;">Medications</span>
+                            </div>
+                            <div>
+                                <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem; border-bottom: 2px solid #ddd;">
+
+                            <div style="padding-left: 0rem; padding-bottom: 0.2rem;">
+                                <span style="font-size: 0.42rem; color: #888;">Allergy</span>
+                            </div>
+                            <div>
+                                <div><span style="font-size: 0.42rem; color: #000;"></span></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; margin: 0 0.36rem; padding-bottom: 0.2rem; padding-top: 0.2rem;">
+                            <div style="padding-left: 0rem; padding-bottom: 0.2rem;">
+                                <span style="font-size: 0.42rem; color: #888;">Nota</span>
+                            </div>
+                            <div>
+                                <div style="border: 2px solid #ddd; border-radius: 8px; height:2rem; padding: 0.2rem;">
+                                    <span style="font-size: 0.42rem; color: #000;">
+                                        Devolver por favor
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var tshowtit = document.getElementById('tshowtit');
+        if (tshowtit) {
+            tshowtit.innerHTML = "Mi Perfil";
+        }
+
+
+        var expand1 = true;
+        var expand2 = false;
+        var expand3 = false;
+        var expand4 = false;
+
+        function Expand1() {
+            var Passage1 = document.getElementById("Passage1");
+            var Arrow1 = document.getElementById("Arrow1");
+            if (expand1) {
+                if (Arrow1) {
+                    Arrow1.src = "{%static 'media/imagenes/arrow_drop_down.png'%}";
+                }
+                if (Passage1) {
+                    Passage1.style.display = 'none';
+                }
+                expand1 = false;
+            } else {
+                if (Arrow1) {
+                    Arrow1.src = "{%static 'media/imagenes/arrow_drop_up.png'%}";
+                }
+                if (Passage1) {
+                    Passage1.style.display = '';
+                }
+                expand1 = true;
+            }
+        }
+        function Expand2() {
+            var Passage2 = document.getElementById("Passage2");
+            var Arrow2 = document.getElementById("Arrow2");
+            if (expand2) {
+                if (Arrow2) {
+                    Arrow2.src = "{%static 'media/imagenes/arrow_drop_down.png'%}";
+                }
+                if (Passage2) {
+                    Passage2.style.display = 'none';
+                }
+                expand2 = false;
+            } else {
+                if (Arrow2) {
+                    Arrow2.src = "{%static 'media/imagenes/arrow_drop_up.png'%}";
+                }
+                if (Passage2) {
+                    Passage2.style.display = '';
+                }
+                expand2 = true;
+            }
+        }
+        function Expand3() {
+            var Passage3 = document.getElementById("Passage3");
+            var Arrow3 = document.getElementById("Arrow3");
+            if (expand3) {
+                if (Arrow3) {
+                    Arrow3.src = "{%static 'media/imagenes/arrow_drop_down.png'%}";
+                }
+                if (Passage3) {
+                    Passage3.style.display = 'none';
+                }
+                expand3 = false;
+            } else {
+                if (Arrow3) {
+                    Arrow3.src = "{%static 'media/imagenes/arrow_drop_up.png'%}";
+                }
+                if (Passage3) {
+                    Passage3.style.display = '';
+                }
+                expand3 = true;
+            }
+        }
+    </script>
+
+</body>
+</html>

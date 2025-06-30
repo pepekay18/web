@@ -1,0 +1,30 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}ver mascotas{% endblock %}
+
+{% block admin %}
+
+    <h2>Formulario de Productos</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <p>{{form.nombre.label}}</p>
+            <textarea name="nombre" >{{form.nombre.value}}</textarea>
+            <p>{{form.descripcion.label}}</p>
+            <textarea name="descripcion" >{{form.descripcion.value}}</textarea>
+            <p>{{form.stock.label}}</p>
+            <input type="number" name="stock" value="{{form.stock.value}}">
+            <p>{{form.precio_promocion.label}}</p>
+            <input type="number" name="precio_promocion" value="{{form.precio_promocion.value}}">
+            <p>{{form.promocion.label}}</p>
+            <textarea name="promocion" >{{form.promocion.value}}</textarea>
+            <p>{{form.precio.label}}</p>
+            <input type="number" name="precio" value="{{form.precio.value}}">
+            <p>{{form.precio_costo.label}}</p>
+            <input type="number" name="precio_costo" value="{{form.precio_costo.value}}">
+            <input type="file" name="imagen" accept="image/*">
+            {{form.errors}}
+            <button type="submit">Guardar</button>
+    </form>
+    
+{%endblock%}

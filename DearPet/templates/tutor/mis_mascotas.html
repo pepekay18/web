@@ -1,0 +1,98 @@
+{% extends "tutor/template.html" %}
+{%load static%}
+
+{% block tutor %}
+<body>
+<form class="layui-form" action>
+    <div class="tag-cc">
+        <div style="background: #f6f6f6;">
+            <div class="ww" style="background: #f6f6f6;">
+                <div class="swiper-container tabcate swiper-container-horizontal">
+                    <div class="swiper-wrapper" style="background: rgb(246, 246, 246); transform: translate3d(0px, 0px, 0px);">
+                    </div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+            </div>
+            <div style="background: #f6f6f6;padding: 0.2rem;">
+
+            </div>
+            <div class="swiper-container tabcc">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-no-swiping">
+                        <div class="list">
+                            <div class="ww"><!-- CORRECTO: ul con li directos -->
+                                <ul style="padding-top: 0.36rem; background: #e8e8e8;">
+                                    {% for mas in mascotas %}
+                                    <li class="clearfix">
+                                        <div>
+                                            <div class="top clearfix">
+                                                <a href="{% url 'crear_mascotas' %}?id_mascotas={{ mas.id_mascotas }}"><em class="icofont edit">&#xec55;</em></a>
+                                                <a onclick=""><em class="icofont">&#xec53;</em></a>
+                                                <div></div>
+                                                <div class="img fl" style="background-image: url('{{ mas.foto }}'); background-size: cover; background-position: center; width: 1.6rem; height: 2.2rem; overflow: hidden; object-fit: cover; border-radius: 10px; border: 2px solid #888;"></div>
+                                                <div style="width: 1.6rem;"></div>
+                                                <div class="info fr">
+                                                    <h1 class="oneline" style="width: 5.2rem;" onclick="">{{ mas.nombre }}</h1>
+                                                    <p class="oneline hidden" onclick=""></p>
+                                                    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onclick="">
+                                                        {{ mas.raza_id_raza.descripcion }} /
+                                                        {% if mas.genero == 1 %}
+                                                            Macho
+                                                        {% elif mas.genero == 2 %}
+                                                            Hembra
+                                                        {% else %}
+                                                            Desconocido
+                                                        {% endif %}
+                                                    </p>
+                                                    <p>
+                                                        <a href="" style="border-bottom: 1px solid #2460ae; font-size: 0.4rem; color: #2460ae">
+                                                            <span>Perfil</span><span>&gt;&gt;</span>
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; align-items: center; margin-top: 0.3rem;">
+                                                <div class="pos" style="margin-left: auto; display: flex; align-items: center;">
+                                                    <p><u style="font-weight: bold;"></u></p>
+                                                    <p><u style="font-weight: bold;">¡ESTOY PERDIDO!</u></p>
+                                                    <input type="checkbox" name="switch" value="" lay-skin="switch">
+                                                    <div class="layui-unselect layui-form-switch" lay-skin="_switch"><em></em><i></i></div>
+                                                    <a class="privacytips" style="font-weight: bold; border: 2px solid #999;">?</a>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div style="height: 4rem;"></div>
+                        </div> <!-- cierra .list -->
+                    </div> <!-- cierra .swiper-slide -->
+                </div> <!-- cierra .swiper-wrapper -->
+            </div> <!-- cierra .swiper-container -->
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var tshowtit = document.getElementById('tshowtit');
+        if (tshowtit) {
+            tshowtit.innerHTML = "Mis Mascotas";
+        }
+
+        $(function () {
+            $(".privacytips").mouseover(function (event) {
+                var _this = $(this);
+                _this.justToolsTip({
+                    events: event,
+                    animation: "moveInBottom",
+                    width:"200px",
+                    contents: 'Si se pierde, puede activar este botón y luego se mostrará el ícono "OH, ESTOY PERDIDO" en la primera página.',
+                    gravity: 'bottom'
+                });
+            });
+    });
+</script>
+</body>
+ {% endblock %}

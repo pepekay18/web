@@ -1,0 +1,23 @@
+{% extends "html/template.html" %}
+
+{% block title %}Recuperar{% endblock %}
+
+{% block body %}
+
+
+
+<div class="cien col-12">
+    <form method="post" class="cien">
+
+        {% csrf_token %}
+        <div class="col-10 col-sm-5 col-md-3 margin cien">
+            <h1 class="center">Recuperar contraseña</h1>
+            <input class="form-control" type="email" placeholder="email registrado" name="email" required>
+            <button class="btn btn-dearpet-secundario bformulario">Recuperar</button>
+
+            <p>recordo su contraseña? <a href="{% url 'login'%}">login</a></p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

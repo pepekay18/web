@@ -1,0 +1,37 @@
+{% extends "html/template.html" %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+
+{% block body %}
+
+
+<div class="cien col-12 row">
+    <div class="col-md-6 center">
+        <div class="col-md-6 centrado">
+            <div class="card">
+                <img class="card-img-top" src="{% static "media/iconos/ICONOS-16.png" %}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Tutor</h5>
+                  <p class="card-text">Quiero registrarme para mantener el cuidado de mi mascota.</p>
+                  <a href="{% url 'crearusuario'%}" class="btn btn-dearpet">Soy tutor</a>       
+                       
+                </div>
+              </div>
+        </div>        
+    </div>
+    <div class="col-md-6 center">
+        <div class="col-md-6 centrado">
+            <div class="card">
+                <img class="card-img-top" src="{% static "media/iconos/ICONOS-10.png" %}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Veterinario</h5>
+                  <p class="card-text">Soy profesional veternario y necesito registrarme para administrar mis pacientes.</p>
+                  <a href="{% url 'crearveterinario'%}" class="btn btn-dearpet">Soy Veterinario</a>
+                  
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+{% endblock %}

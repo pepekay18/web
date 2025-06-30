@@ -1,0 +1,34 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}crear mascotas{% endblock %}
+
+{% block admin %}
+    <h2>Formulario de Mascotas</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="nombre" value="{{form.nombre.value}}">
+        <input type="date"  name="fchnacimiento" value="{{ form.fchnacimiento.value|date:"Y-m-d" }}">
+        <input type="text" name="descripcion" value="{{form.descripcion.value}}">
+       
+        <select name="extraviada">
+            <option value="1" {% if form.extraviada.value == 1 %}selected{% endif %}>Sí</option>
+            <option value="0" {% if form.extraviada.value == 0 %}selected{% endif %}>No</option>
+        </select>
+        <input type="text" name="foto" value="{{form.foto.value}}">
+
+        <select name="usuarios_id_usuarios" id="usuarios_id_usuarios" class="form-control" >
+            {%for n in usuario%}
+                <option value="{{n.id_usuarios}}">{{n.nombre}} {{n.primer_apellido}}</option>
+            {% endfor %}
+        </select>
+        <select name="raza_id_raza" id="raza_id_raza" class="form-control" >
+            {%for n in raza%}
+                <option>{{n}}</option>
+            {% endfor %}
+        </select>
+        {{form.errors}}
+        <button type="submit">Guardar</button>
+    </form>
+
+{%endblock%}

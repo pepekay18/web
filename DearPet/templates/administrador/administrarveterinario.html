@@ -1,0 +1,104 @@
+{% extends "administrador/baseadministrador.html" %}
+
+{% block title %}inicio{% endblock %}
+
+{% block admin %}
+
+<div class="col-12 cien">
+    <div class="col-11 tabla margin">
+        <div class="row col-12 margin center fila">
+            <div class="datos">
+                <p>id</p>
+            </div>
+            <div class="datos">
+                <p>nombre</p>
+            </div>
+            <div class="datos">
+                <p>rut</p>
+            </div>
+            <div class="datos">
+                <p>primer apellido</p>
+            </div>
+            <div class="datos">
+                <p>segundo apellido</p>
+            </div>
+            <div class="datos">
+                <p>telefono</p>
+            </div>
+            <div class="datos">
+                <p>direccion</p>
+            </div>
+            <div class="datos-correo">
+                <p>email</p>
+            </div>
+            <div class="tabla-text">
+                <p>veterinarios</p>
+            </div>
+        </div>
+        {% for user in users %}
+
+
+        <form method="post" class="row col-12 margin center fila">
+            {% csrf_token %}
+            <div class="datos">
+                <p>{{user.id}}</p>
+                <input type="hidden" name="usuario_id" value="{{user.id}}">
+            </div>
+            <div class="datos">
+                <p>{{user.nombre}}</p>
+            </div>
+            <div class="datos">
+                <p>{{user.rut}}</p>
+            </div>
+            <div class="datos">
+                <p>{{user.primer_apellido}}</p>
+            </div>
+            <div class="datos">
+                <p>{{user.segundo_apellido}}</p>
+            </div>
+            <div class="datos">
+                <p>{{user.fono}}</p>
+            </div>
+            <div class="datos">
+                <p>{{user.direccion}}</p>
+            </div>
+
+            <div class="datos-correo">
+                <p>{{user.email}}</p>
+            </div>
+            <div class=" tabla-text">
+                <input type="checkbox" name="veterinarios" {% if user.id_perfiles == 2 %}checked{% endif %}
+                    onchange="this.form.submit()">
+            </div>
+
+        </form>
+        {% endfor %}
+    </div>
+</div>
+{% if users.has_other_pages %}
+
+<div class="pagination margin" style="width: 250px;">
+
+    {% if users.has_previous %}
+    <a class="btn btn-primary " href="?page={{ users.previous_page_number }}"><i class="fa-solid fa-arrow-left"></i></a>
+    {% else %}
+    <a class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i></a>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+    {% if users.number == i %}
+    <a class="btn btn-primary">{{ i }}</a>
+    {% else %}
+    <a class="btn btn-primary" href="?page={{ i }}">{{ i }}</a>
+    {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+    <a class="btn btn-primary" href="?page={{ users.next_page_number }}"><i class="fa-solid fa-arrow-right"></i></a>
+    {% else %}
+    <a class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></a>
+    {% endif %}
+</div>
+
+
+{% endif %}
+
+{% endblock %}

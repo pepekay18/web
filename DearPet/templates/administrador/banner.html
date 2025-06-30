@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario de banner</title>
+</head>
+
+<body>
+
+    <h2>Formulario de Banner</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="nombre">{{ form.nombre.value }}</textarea>
+        {{form.ubicacion.label}} {{form.ubicacion}}
+
+        <button type="submit">Guardar</button>
+    </form>
+
+</body>
+
+</html>
