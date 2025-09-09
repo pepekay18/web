@@ -16,13 +16,13 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-        <img src="{% static 'media/imagenes/logo1.png' %}" class="img-fluid">
+        <img src="{% static 'imagenes/logo1.png' %}" class="img-fluid">
         <h1><span class="spr">Todo para el cuidado de tu mascota en un solo lugar</span>!</h1>
         <br><br><br>
         <h2>
           <a class="enlace_naranja spr" href="#">Conoce nuestra tecnologia</a>
         </h2>
-      </div>      
+      </div>
     </div>
   </div>
 
@@ -38,18 +38,18 @@
         <h2>{{i.nombre|safe}}</h2>
         <h3>Características: </h3>
         <p>{{i.caracteristicas|safe}}
-          
+
         <div class="d-flex align-items-center mt-4">
           <span class="h6 mb-0"><h5>${{i.precio}}</h5></span>
           <span class="badge badge-success rounded-pill ml-auto">{%if i.stok > 0 %}En Stok{%else %} Sin Stok{%endif%} </span>
         </div>
 
-    
+
       </div>
       <div class="card-footer" style="text-align: center;">
 
 
-          
+
           <a href="{% url 'pro' i.id_productos %}" type="button"  class="buy-btn btn " style="background-color: var(--azul); color: white;" >
             Ver Producto
           </a>
@@ -80,7 +80,7 @@
           <div class="accordion-list">
             <ul>
               <li>
-                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-15.png' %}"/></span>Agenda multifuncional<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span><img class="icon-dp-vet" src="{% static 'iconos/ICONOS-15.png' %}"/></span>Agenda multifuncional<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                   <p>
                     Organiza tus citas, programa recordatorios, utiliza el calendario para sacar estadísticas de atenciones, recordarles a los tutores de tus pacientes cuando corresponde control, próxima vacuna, desparasitar y mas.
@@ -89,24 +89,24 @@
               </li>
 
               <li>
-                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-09.png' %}"/></span>Registro de pacientes<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'iconos/ICONOS-09.png' %}"/></span>Registro de pacientes<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                   <p>
-                    Lleva un registro completo de todas tus mascotas en su solo lugar, de fácil acceso en el teléfono móvil, tablet  y computador. 
+                    Lleva un registro completo de todas tus mascotas en su solo lugar, de fácil acceso en el teléfono móvil, tablet  y computador.
                   </p>
                 </div>
               </li>
 
               <li>
-                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-12.png' %}"/></span>Ficha clinica<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'iconos/ICONOS-12.png' %}"/></span>Ficha clinica<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                   <p>
-                    Predeterminada con un formato didáctico fácil de completar para agilizar el proceso de registro y no pasar por alto ningún dato o información importante. Y lo mejor de todo, si tu paciente es parte de la comunidad DearPet contactas su Tag ID y su perfil y ficha clinica quedan guardados en tus registros con un solo clic.  
+                    Predeterminada con un formato didáctico fácil de completar para agilizar el proceso de registro y no pasar por alto ningún dato o información importante. Y lo mejor de todo, si tu paciente es parte de la comunidad DearPet contactas su Tag ID y su perfil y ficha clinica quedan guardados en tus registros con un solo clic.
                   </p>
                 </div>
               </li>
               <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-10.png' %}"/></span>Registro de atenciones<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'iconos/ICONOS-10.png' %}"/></span>Registro de atenciones<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
                     <p>
                       En el perfil de cada una de tus mascotas quedaran registradas todas las atenciones realizadas en orden cronológico, con detalle de diagnostico, procedimientos, indicaciones y documentos asociados; como recetas, ordenes medicas, comprovantes, resultados de exámenes de imagen y laboratorio.
@@ -114,7 +114,7 @@
                   </div>
                 </li>
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'media/iconos/ICONOS-14.png' %}"/></span>Recetas y ordenes medicas digitales<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span><img class="icon-dp-vet" src="{% static 'iconos/ICONOS-14.png' %}"/></span>Recetas y ordenes medicas digitales<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
                     <p>
                       Ya no es necesario usar papel y llevar tu sello a todos lados, desde la aplicación puedes generar recetas, ordenes medicas digitales y compartirlas con tu pacientes y farmacias. Al generar la receta u orden desde el perfil de la mascota se rellenan de manera automática  los datos del paciente. También quedaran guardarlas en el historial del peludo.
@@ -127,7 +127,7 @@
 
         </div>
 
-        <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("{% static 'media/imagenes/veterinario1.jpg'%}");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+        <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("{% static 'imagenes/veterinario1.jpg'%}");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
       </div>
 
     </div>
@@ -139,7 +139,7 @@
 
       <div class="row">
         <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
-          <img src="{% static 'media/assets/img/skills.png'%}" class="img-fluid" alt="">
+          <img src="{% static 'assets/img/skills.png'%}" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
           <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
@@ -278,7 +278,7 @@
 
         <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="member d-flex align-items-start">
-            
+
             <div class="member-info">
               <h4>Walter White</h4>
               <span>Veterinario</span>
@@ -296,7 +296,7 @@
 
         <div class="col-lg-3 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="member d-flex align-items-start">
-            
+
             <div class="member-info">
               <h4>Sarah Jhonson</h4>
               <span>Veterinario</span>
@@ -314,7 +314,7 @@
 
         <div class="col-lg-3 mt-4" data-aos="zoom-in" data-aos-delay="300">
           <div class="member d-flex align-items-start">
-            
+
             <div class="member-info">
               <h4>William Anderson</h4>
               <span>Tutor</span>
@@ -332,7 +332,7 @@
 
         <div class="col-lg-3 mt-4" data-aos="zoom-in" data-aos-delay="400">
           <div class="member d-flex align-items-start">
-           
+
             <div class="member-info">
               <h4>Amanda Jepson</h4>
               <span>Tutor</span>
@@ -353,28 +353,29 @@
     </div>
   </section><!-- End Team Section -->
 
-  <section id="contacto">
-    <div class="container">
+ <section id="contacto" class="contact section">
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Contacto</h2>
+      </div>
 
       <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
               <!-- Nested Row within Card Body -->
               <div class="row">
-                  <div class="col-lg-5 d-none d-lg-block">
-                    <img class="w-100" src="{% static 'media/imagenes/dearpet2.jpg' %}"/>
+                  <div class="col-lg-5">
+                    <div class="info-wrap">
+                      <img class="w-100" src="{% static 'imagenes/dearpet2.jpg' %}"/>
+                    </div>
                   </div>
                   <div class="col-lg-7">
-                      <div class="p-5">
-                          <div class="text-center">
-                              <h1 class="h4 text-gray-900 mb-4">Contactenos</h1>
-                          </div>
-                          <form class="user" method="post" >
+
+                          <form class="php-email-form aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" method="post" >
                             {% csrf_token %}
                               <div class="form-group row">
                                   <div class="col-sm-12 mb-3 mb-sm-0">
                                       <input required type="text" name="nombre" class="form-control form-control-user" id="contacto_nombre"
                                           placeholder="Nombre">
-                                  </div>                                  
+                                  </div>
                               </div>
                               <div class="form-group row">
                                 <div class="col-sm-12">
@@ -388,17 +389,17 @@
                                       placeholder="Cuentanos tu historia"></textarea>
                                 </div>
                               </div>
-                              <button class="btn col-sm-12 btn-user btn-block btn-contacto">Enviar</button>
-                          </form>                         
-                      </div>
+                            <div class="col-md-12 text-center">
+                              <button type="submit">Enviar</button>
+                            </div>
+                          </form>
+
                   </div>
               </div>
           </div>
       </div>
-
-  </div>
-
   </section>
+
 </main><!-- End #main -->
 
 <!-- Modal -->

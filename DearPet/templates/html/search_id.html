@@ -29,15 +29,15 @@
 <script type="text/javascript" src="{%static 'assets/js/wow.min.js'%}"></script>
 <script type="text/javascript" src="{%static 'assets/js/jquery-weui.min.js'%}"></script>
 <script type="text/javascript" src="{%static 'assets/layui/layui.js'%}"></script>
-<script type="text/javascript" src="{%static 'media/js/Common.js'%}?v=123"></script>
+<script type="text/javascript" src="{%static 'js/Common.js'%}?v=123"></script>
 <script type="text/javascript" src="{%static 'assets/js/nav.js'%}?v=6"></script>
 <script type="text/javascript" src="{%static 'assets/js/login.js'%}?v=6"></script>
 
 
-<script
+<!--script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrhrHSopeKF592HZubllqmCQn2dksYs54&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cA"
     async defer>
-</script>
+</script-->
 
     <style>
         .hidden {
@@ -202,6 +202,7 @@
 
         function SendLocation(locationText) {
          console.log('Estoy entrando');
+         const texto = locationText
             if (navigator.geolocation) {
                 // Obtener las coordenadas del usuario
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -209,7 +210,8 @@
                     const jsonData = {
                         "id_mascotas": {{mascota.id_mascotas}},  // Ejemplo de ID que se enviará al backend
                         "lat": position.coords.latitude,  // Latitud
-                        "lon": position.coords.longitude  // Longitud
+                        "lon": position.coords.longitude, // Longitud
+                        "msg": texto
                     };
 
                     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -233,7 +235,7 @@
                       layui.use('layer', function () {
                         var layer = layui.layer;
                         layer.open({
-                          title: 'Respuesta',
+                          title: '',
                           content: data.message,
                           btn: ['Cerrar'],
                           yes: function(index) {
@@ -263,10 +265,12 @@
     <script>
     function SendInitialLocation(lat, lng) {
     // Crear el objeto JSON con el id y las coordenadas
+        const texto = ""
         const jsonData = {
             "id_mascotas": {{mascota.id_mascotas}},  // Ejemplo de ID que se enviará al backend
             "lat": lat,  // Latitud
-            "lon": lng  // Longitud
+            "lon": lng,  // Longitud
+            "msg": texto
         };
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -296,8 +300,19 @@
         });
 
     }
+    </script>
+<!-- Tu script dinámico para cargar Google Maps -->
+    <script>
+      function loadMapScript() {
+        const script = document.createElement('script');
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrhrHSopeKF592HZubllqmCQn2dksYs54&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cA";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
 
-    function initMap() {
+    window.initMap = function () {
+        console.log("🌍 initMap ejecutado");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -318,12 +333,14 @@
         }
     }
 
+    // Cargá el script solo cuando estés listo
+  document.addEventListener("DOMContentLoaded", loadMapScript);
+
     // Ejecuta al cargar el DOM
     $(document).ready(function () {
-        initMap();
+        //initMap();
     });
-
-        </script>
+</script>
 
 
 </body>

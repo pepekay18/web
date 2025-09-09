@@ -35,3 +35,6 @@ var1 = host(variables_entorno)
 var2 = user(variables_entorno)
 var3 = password(variables_entorno)
 var4 = name(variables_entorno)
+
+#aws_access_key_id = 'AKIA3I2YORI2FSDVQL47'
+#aws_secret_access_key = '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'

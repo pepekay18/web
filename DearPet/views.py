@@ -25,7 +25,7 @@ import traceback
 import sys
 from django.core.mail import send_mail
 from django.conf import settings
-from datetime import datetime
+from datetime import datetime, date
 
 # __url="http://3.15.180.186:8080/"
 __url = "http://localhost:8080/"
@@ -358,8 +358,8 @@ def crear_mascota(request):
     if request.method == 'POST':
 
         raza = []
-        url_raza = f"{__url}raza/todas/{tipo_mascota_id}"
-        response_raza = requests.get(url_tipo_mascota)
+        url_raza = f"{__url}raza/todas/{tipo_mascota.tipo_mascota_id}"
+        response_raza = requests.get(url_raza)
         raza = response_raza.json()
         if request.method == 'POST':
             nombre = request.POST.get('nombre')
@@ -376,7 +376,8 @@ def activar_usuario(request, id_usuario):
 
     # Si la solicitud fue exitosa, puedes redirigir al usuario a la página de inicio
     if response.status_code == 200:
-        return redirect('inicio')
+       # return redirect('inicio')
+       return render(request, "html/activar.html")
 
 
 def desbloquear(request, id_usuario):
@@ -388,7 +389,8 @@ def desbloquear(request, id_usuario):
 
     # Si la solicitud fue exitosa, puedes redirigir al usuario a la página de inicio
     if response.status_code == 200:
-        return redirect('inicio')
+       # return redirect('inicio')
+       return render(request, "html/desbloquear.html")
 
 
 def error_404(request, exception):
@@ -550,14 +552,16 @@ def SendNotification(request):
             id_mascotas = data.get('id_mascotas')
             latitud = data.get('lat', 0.0)
             longitud = data.get('lon', 0.0)
+            mensaje = data.get('msg')
 
             # Imprime las coordenadas para ver si se están recibiendo correctamente
-            print(f"Latitud: {latitud}, Longitud: {longitud}, mascota: {id_mascotas}")
+            print(f"Latitud: {latitud}, Longitud: {longitud}, mascota: {id_mascotas}, msg: {mensaje}")
 
             payload = {
                 "id_mascotas": id_mascotas,
                 "latitud": latitud,
-                "longitud": longitud
+                "longitud": longitud,
+                "msg": mensaje
             }
 
             # La URL de la API a la que enviarás la notificación
@@ -596,55 +600,62 @@ def allRazasTipoMascota(request, tipoId):
            return JsonResponse({"error": "JSON mal formado"}, status=400)
        return None
 
+def calcular_edad(fecha_nacimiento_str):
+    try:
+        nacimiento = datetime.strptime(fecha_nacimiento_str, "%d-%m-%Y").date()
+        hoy = date.today()
+        edad = hoy.year - nacimiento.year - ((hoy.month, hoy.day) < (nacimiento.month, nacimiento.day))
+        return edad
+    except (ValueError, TypeError):
+        return None  # En caso de error de formato o si es None
 
 def MyProfile(request, id_externo):
     mascota = Mascotas.objects.filter(eliminado=0, id_externo=id_externo).first()
+    edad = calcular_edad(mascota.fchnacimiento) if mascota and mascota.fchnacimiento else None
     # usuario = Usuarios.objects.filter(eliminado=0, id_usuarios=mascota.usuarios_id_usuarios.id_usuarios).first()
 
     return render(request, 'html/tag_SOS.html', {
         'id_externo': id_externo,
-        'mascota': mascota})
+        'mascota': mascota,
+        'edad': edad})
 
 #@csrf_exempt  # solo si no enviás CSRF desde JS
 def upload_images(request):
     if request.method == 'POST':
         try:
-            data = json.loads(request.body)
-            img_base64 = data.get('img')
-            tipo = data.get('type')
-            # print("🧪 Base64 recibido (corte):", img_base64[:100])
-            if not img_base64:
-                return HttpResponseBadRequest("Imagen vacía.")
+            payload = json.loads(request.body)
 
-            if "," in img_base64:
-                img_base64 = img_base64.split(",")[1]
+            upload_api_url = f"{__url}upload/"
 
-            print("🧪 sin cabecera):", img_base64[:100])
+            response = requests.post(
+                upload_api_url,
+                json={
+                    "carpeta": "mascotas",
+                    "img": payload["img"]
+                }
+            )
 
-            image_data = base64.b64decode(img_base64)
-            print("🧪 antes open")
-            try:
-                image = Image.open(BytesIO(image_data))
-                image = image.convert('RGB')
-            except Exception as e:
-                print("🧪 no se pudo abrir la imagen" )
-                return JsonResponse({'error': f'No se pudo abrir imagen: {str(e)}'}, status=400)
+            if response.status_code == 200:
+                data = response.json()
+                return JsonResponse({
+                    'url': data.get('message')  # si lo estás incluyendo
+                })
 
-            imagen_nombre = f"{uuid4()}.png"
-            print(imagen_nombre)
-            upload_dir = os.path.join(settings.MEDIA_ROOT, 'mascota')
-            os.makedirs(upload_dir, exist_ok=True)
-            upload_path = os.path.join(upload_dir, imagen_nombre)
-            print(upload_path)
-            image.save(upload_path)
+            else:
+                return JsonResponse({
+                    'error': f'Error desde API externa: {response.status_code}',
+                    'detail': response.text
+                }, status=response.status_code)
 
-            url_imagen = f"{settings.MEDIA_URL}mascota/{imagen_nombre}"
-            return JsonResponse({'url': url_imagen})
+        #except Exception as e:
+         #   return JsonResponse({'error': f'Error al subir imagen: {str(e)}'}, status=500)
 
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            import traceback
+            traceback.print_exc()  # 👈 imprime el error completo en consola
+            return JsonResponse({"error": str(e)}, status=500)
 
-    return HttpResponseBadRequest("Método no permitido.")
+    return JsonResponse({'error': 'Método no permitido.'}, status=400)
 
 def delete_img_path(request):
     if request.method == 'POST':
@@ -697,3 +708,42 @@ def validarQR(request):
 
     return JsonResponse({'error': 'Método no permitido.'}, status=400)
 
+def upload_images_org(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            img_base64 = data.get('img')
+            tipo = data.get('type')
+            # print("🧪 Base64 recibido (corte):", img_base64[:100])
+            if not img_base64:
+                return HttpResponseBadRequest("Imagen vacía.")
+
+            if "," in img_base64:
+                img_base64 = img_base64.split(",")[1]
+
+            print("🧪 sin cabecera):", img_base64[:100])
+
+            image_data = base64.b64decode(img_base64)
+            print("🧪 antes open")
+            try:
+                image = Image.open(BytesIO(image_data))
+                image = image.convert('RGB')
+            except Exception as e:
+                print("🧪 no se pudo abrir la imagen" )
+                return JsonResponse({'error': f'No se pudo abrir imagen: {str(e)}'}, status=400)
+
+            imagen_nombre = f"{uuid4()}.png"
+            print(imagen_nombre)
+            upload_dir = os.path.join(settings.MEDIA_ROOT, 'mascota')
+            os.makedirs(upload_dir, exist_ok=True)
+            upload_path = os.path.join(upload_dir, imagen_nombre)
+            print(upload_path)
+            image.save(upload_path)
+
+            url_imagen = f"{settings.MEDIA_URL}mascota/{imagen_nombre}"
+            return JsonResponse({'url': url_imagen})
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return HttpResponseBadRequest("Método no permitido.")

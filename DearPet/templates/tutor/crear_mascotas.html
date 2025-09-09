@@ -42,6 +42,15 @@
 
             <!-- breed -->
             <div style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
+                <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;" onclick="FocusOnInput('RazaName')">Raza:</span>
+                <div style="flex:1;">
+                    <input type="text" class="custom-input" id="RazaName" name="RazaName" maxlength="50">
+                </div>
+                <span class="error" id="error-RazaName" style="color:red; font-size: 0.35rem;"></span>
+            </div>
+
+            <!-- breed -->
+            <div hidden style="display:flex; border-bottom: 2px solid #ddd; align-items:center; height:1.2rem;">
                <span style="flex:1; color:#888; font-size: 0.4rem; flex:1; padding:0.2rem;" onclick="FocusOnInput('raza_id_raza')">Raza:</span>
                 <select style="margin-bottom: 20px;" name="raza_id_raza" id="raza_id_raza">
                     <option value="" disabled selected> </option>
@@ -422,6 +431,7 @@ document.getElementById("form").addEventListener("submit", function(event) {
     const tipoMascota = document.getElementById("id_tipo").value;
     const nombre = document.getElementById("PetName").value.trim();
     const raza = document.getElementById("raza_id_raza").value;
+    const razaName = document.getElementById("razaName").value;
     const genero = document.querySelector("select[name='genero']").value;
     const nacimiento = document.getElementById("BirthDate").value;
     const edad = document.getElementById("Age").value.trim();
@@ -433,6 +443,7 @@ document.getElementById("form").addEventListener("submit", function(event) {
     if (!tipoMascota) errores.push("Debe seleccionar el tipo de mascota.");
     if (!nombre) errores.push("Debe ingresar un nombre.");
     if (!raza) errores.push("Debe seleccionar una raza.");
+    if (!razaName) errores.push("Debe Ingresar una raza.");
     if (!genero) errores.push("Debe seleccionar el género.");
     if (!nacimiento) errores.push("Debe ingresar la fecha de nacimiento.");
     // if (!edad) errores.push("Debe ingresar la edad.");
